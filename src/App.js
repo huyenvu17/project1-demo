@@ -2,24 +2,32 @@ import React, { Component } from 'react'
 import './assets/styles/main.scss';
 import { Route, Switch } from 'react-router-dom';
 import PageNotFound from './containers/PageNotFound/index';
-import routes from './utils/routes';
-import AdminTemplate from './templates/AdminTemplate';
-
+import dashboardRoutes from './utils/routes/dashboard.routes';
+import defaultRoutes from './utils/routes/default.routes';
+import DasboardTemplate from './templates/DasboardTemplate';
+import DefaultTemplate from './templates/DefaultTemplate';
 export default class App extends Component {
     render() {
 
-        const renderLayout = (routes) => {
-            console.log(routes)
+        const renderDashboardLayout = (routes) => {
             if (routes && routes.length > 0) {
                 return routes.map((route, index) => {
-                    return <AdminTemplate key={index} exact={route.exact} path={route.path} Component={route.component} />
+                    return <DasboardTemplate key={index} exact={route.exact} path={route.path} Component={route.component} />
+                })
+            }
+        }
+        const renderDefaultLayout = (routes) => {
+            if (routes && routes.length > 0) {
+                return routes.map((route, index) => {
+                    return <DefaultTemplate key={index} exact={route.exact} path={route.path} Component={route.component} />
                 })
             }
         }
         return (
             <div>
                 <Switch>
-                    {renderLayout(routes)}
+                    {renderDashboardLayout(dashboardRoutes)}
+                    {renderDefaultLayout(defaultRoutes)}
                     <Route path="" component={PageNotFound} />
                 </Switch>
 

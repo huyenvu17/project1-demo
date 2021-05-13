@@ -3,23 +3,22 @@ import React, { useEffect, useState } from 'react';
 import {Route} from 'react-router-dom';
 import Header from '../components/Header';
 
-function AdminLayout(props){
+function DefaultLayout(props){
   return (
-    <div className="mainpage">
-      <Header />
+    <div className="defaultpage">
       {props.children}
       <Footer />
     </div>
   )
 } 
-export default function AdminTemplate({Component, ...props}) {
+export default function DefaultTemplate({Component, ...props}) {
   return (
     <Route 
       {...props}
       render={(propsComponent) => (
-        <AdminLayout>
+        <DefaultLayout>
           <Component {...propsComponent} />
-        </AdminLayout>
+        </DefaultLayout>
       )}
     />
   )

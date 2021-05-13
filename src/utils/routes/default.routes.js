@@ -1,18 +1,7 @@
-import Landing from "../../containers/Landing/index";
 import SignIn from "../../containers/Auth/SignIn/index";
 import SignUp from "../../containers/Auth/SignUp/index";
 
-const routes = [
-    {
-        exact: true,
-        path: '/',
-        component: Landing
-    },
-    {
-        exact: true,
-        path: '/home',
-        component: Landing
-    },
+const defaultRoutes = [
     {
         exact: false,
         path: '/signin',
@@ -25,4 +14,4 @@ const routes = [
     }
 ];
 
-export default routes;
+export default defaultRoutes;
