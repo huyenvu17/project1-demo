@@ -3,7 +3,7 @@ import * as loadingConst from '../constants/loading.const';
 const initialState = {
     isLoading: false
 }
-export const loadingReducer = (state = initialState, action) => {
+const loadingReducer = (state = initialState, action) => {
     const { type } = action
     switch(type){
         case loadingConst.SHOW_LOADING:{
@@ -22,3 +22,5 @@ export const loadingReducer = (state = initialState, action) => {
             return state
     }
 }
+
+export default loadingReducer;

@@ -19,7 +19,7 @@ class Loading extends Component {
                             color="#00BFFF"
                             height={100}
                             width={100}
-                            timeout={3000}
+                            //timeout={3000}
                         />
                     </div>
                 ) : <div></div>}

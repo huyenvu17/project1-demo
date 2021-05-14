@@ -2,15 +2,15 @@ import * as dashboardConst from '../constants/dashboard.const';
 
 const initialState = {
     listData: [], 
-    loaded: false,
     isLoading: false
 }
-export const dashboardReducer = (state = initialState, action) =>{
+const dashboardReducer = (state = initialState, action) =>{
     const { type } = action;
     switch(type){
         case dashboardConst.FETCH_LIST:{
             return {
                 ...state,
+                listData: [],
                 isLoading: true
             }
         }
@@ -18,14 +18,12 @@ export const dashboardReducer = (state = initialState, action) =>{
             return {
                 ...state,
                 listData: action.payload,
-                loaded: true,
                 isLoading: false
             }
         }
         case dashboardConst.FETCH_LIST_FAIL:{
             return {
                 ...state,
-                loaded: false,
                 isLoading: false
             }
         }
@@ -33,3 +31,4 @@ export const dashboardReducer = (state = initialState, action) =>{
             return state;
     }
 }
+export default dashboardReducer;

@@ -1,4 +1,5 @@
-import Dashboard from "../../containers/Dashboard/index";
+import Dashboard from "../../containers/Dashboard";
+import Users from "../../containers/Users/index";
 
 const dashboardRoutes = [
     {
@@ -8,8 +9,13 @@ const dashboardRoutes = [
     },
     {
         exact: true,
-        path: '/home',
+        path: '/pets',
         component: Dashboard
+    },
+    {
+        exact: true,
+        path: '/users',
+        component: Users
     }
 ];
 

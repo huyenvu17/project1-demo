@@ -3,11 +3,14 @@ const initialState = {
     email: null,
 }
 
-export const authenticationReducer = (state = initialState, action) => {
+const authenReducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
+        
         default:
         return state;
     }
 
 }
+
+export default authenReducer;
