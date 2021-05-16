@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Layout, Menu } from 'antd';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -9,7 +9,12 @@ import {
     UploadOutlined,
     SmileOutlined
 } from '@ant-design/icons';
-
+import logo from '../../assets/images/logo.svg';
+import ClientMenu from '../../assets/images/menu/clients-menu.svg';
+import PatientsMenu from '../../assets/images/menu/patients-menu.svg';
+import MembersMenu from '../../assets/images/menu/members-menu.svg';
+import ScheduleMenu from '../../assets/images/menu/schedule-menu.svg';
+import FlowMenu from '../../assets/images/menu/flow-menu.svg';
 const pathname = window.location.pathname;
 export default class Header extends Component {
     constructor(props) {
@@ -31,22 +36,45 @@ export default class Header extends Component {
     };
     render() {
         const { current } = this.state;
+        //console.log(pathname, this.props.to)
+        let isActive = false
         return (
-            <Layout.Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-                <div className="logo" />
-                <Menu theme="dark" mode="inline" onClick={this.handleClick} selectedKeys={[current]} 
-                >
-                    <Menu.Item key={"/" || "/pets"} icon={<SmileOutlined />}>
-                        <Link to={"/pets"} id="click-me">
-                            Pets
-                        </Link>
-                    </Menu.Item>
-                    <Menu.Item key={"/users"} icon={<UserOutlined />}>
-                        <Link to={"/users"} id="click-me">
-                            Users
-                        </Link>
-                    </Menu.Item>
-                </Menu>
+            <Layout.Sider trigger={null} collapsible collapsed={this.state.collapsed} className="sideheader">
+                <div className="logo">
+                  <img src={logo}/>
+                </div>
+                <ul className="sideheader__menu">
+                  <li>
+                  <NavLink className="menu__item" exact activeClassName={"is-active"} to={"patients"}>
+                    <span className="item__img"><img src={PatientsMenu}/></span>
+                    <span className="item__title">Patients</span>
+                  </NavLink>
+                  </li>
+                  <li>
+                  <NavLink className="menu__item" activeClassName={"is-active"} to="flow">
+                  <span className="item__img"><img src={FlowMenu}/></span>
+                  <span className="item__title">Flow</span>
+                  </NavLink>
+                  </li>
+                  <li>
+                  <NavLink className="menu__item" activeClassName={"is-active"} to="schedule">
+                    <span className="item__img"><img src={ScheduleMenu}/></span>
+                    <span className="item__title">Schedule</span>
+                  </NavLink>
+                  </li>
+                  <li>
+                  <NavLink className="menu__item" activeClassName={"is-active"} to="clients">
+                    <span className="item__img"><img src={ClientMenu}/></span>
+                    <span className="item__title">Clients</span>
+                  </NavLink>
+                  </li>
+                  <li>
+                  <NavLink className="menu__item" activeClassName={"is-active"} to="members">
+                    <span className="item__img"><img src={MembersMenu}/></span>
+                    <span className="item__title">Members</span>
+                  </NavLink>
+                  </li>
+                </ul>
             </Layout.Sider>
         )
     }

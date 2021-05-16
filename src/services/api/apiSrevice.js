@@ -30,7 +30,12 @@ class API {
     };
 
     get(endpoint) {
-        return this.service.get(endpoint);
+        return fetch(endpoint, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(res=>res.json()).catch(err=>{throw err})
     }
 
 }

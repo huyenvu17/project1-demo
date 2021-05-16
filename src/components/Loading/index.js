@@ -16,7 +16,7 @@ class Loading extends Component {
                     <div className="loading-container">
                         <Loader
                             type="Bars"
-                            color="#00BFFF"
+                            color="#51B78E"
                             height={100}
                             width={100}
                             //timeout={3000}

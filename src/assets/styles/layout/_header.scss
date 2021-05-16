@@ -1,0 +1,35 @@
+.sideheader{
+  background-color: #fff!important;
+  .logo{
+    padding: 1em;
+  }
+  .sideheader__menu{
+    background-color: #fff!important;
+    list-style: none;
+    padding: 0;
+    li{
+      padding: 1em;
+      .menu__item{
+        color: $blue-dark;
+        font-weight: 700;
+        font-size: 1rem;
+        .item__img{
+          margin-right: 1rem;
+          img{
+            width: 2rem;
+          }
+        }
+        .item__title{
+          margin-top: 5px;
+        }
+        &.is-active{
+          color: $green-default;
+          .item__title{
+            padding-top: 5px;
+          }
+        }
+      }
+    }
+
+  }
+}

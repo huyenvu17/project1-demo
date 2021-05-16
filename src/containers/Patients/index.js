@@ -94,7 +94,7 @@ const { Header, Sider, Content } = Layout;
 //   null
 // )(Dashboard);
 
-class Dashboard extends Component {
+class Patients extends Component {
   mounted = true;
   constructor(props) {
     super(props);
@@ -162,12 +162,6 @@ class Dashboard extends Component {
     const {listData} = this.props;
     return (
       <div>
-        <Header className="site-layout-background" style={{ padding: 0 }}>
-            {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-              className: 'trigger',
-              onClick: this.toggle,
-            })}
-          </Header>
           <Content
             className="site-layout-background"
             style={{
@@ -189,4 +183,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onFetchList: () => dispatch(dashboardActions.fetchList())
 })
-export default connect(mapStateToProps,mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps,mapDispatchToProps)(Patients)

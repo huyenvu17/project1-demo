@@ -1,7 +1,7 @@
 import SignIn from "../../containers/Auth/SignIn/index";
 import SignUp from "../../containers/Auth/SignUp/index";
 
-const defaultRoutes = [
+const authenRoutes = [
     {
         exact: false,
         path: '/signin',
@@ -14,4 +14,4 @@ const defaultRoutes = [
     }
 ];
 
-export default defaultRoutes;
+export default authenRoutes;

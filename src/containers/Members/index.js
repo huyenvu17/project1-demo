@@ -11,7 +11,7 @@ import { EditOutlined, DeleteOutlined, MenuUnfoldOutlined,
 
 const { Header, Sider, Content } = Layout;
 
-class Users extends Component {
+class Members extends Component {
   mounted = true;
   constructor(props) {
     super(props);
@@ -71,12 +71,6 @@ class Users extends Component {
     console.log('listUsers',listUsers)
     return (
       <div>
-        <Header className="site-layout-background" style={{ padding: 0 }}>
-            {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-              className: 'trigger',
-              onClick: this.toggle,
-            })}
-          </Header>
           <Content
             className="site-layout-background"
             style={{
@@ -93,9 +87,9 @@ class Users extends Component {
 }
 
 const mapStateToProps = state => ({
-   listUsers: state.dashboardReducer.listUsers
+   listUsers: state.usersReducer.listUsers
 })
 const mapDispatchToProps = dispatch => ({
   onFetchListUsers: () => dispatch(usersActions.fetchUserList())
 })
-export default connect(mapStateToProps,mapDispatchToProps)(Users)
+export default connect(mapStateToProps,mapDispatchToProps)(Members)

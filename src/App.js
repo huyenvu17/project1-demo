@@ -3,23 +3,23 @@ import './assets/styles/main.scss';
 import { Route, Switch } from 'react-router-dom';
 import PageNotFound from './containers/PageNotFound/index';
 import dashboardRoutes from './utils/routes/dashboard.routes';
-import defaultRoutes from './utils/routes/default.routes';
-import DasboardTemplate from './templates/DasboardTemplate';
-import DefaultTemplate from './templates/DefaultTemplate';
+import authenRoutes from './utils/routes/authen.routes';
+import DashboardTemplate from './templates/DashboardTemplate';
+import AuthenTemplate from './templates/AuthenTemplate';
 export default class App extends Component {
     render() {
 
         const renderDashboardLayout = (routes) => {
             if (routes && routes.length > 0) {
                 return routes.map((route, index) => {
-                    return <DasboardTemplate key={index} exact={route.exact} path={route.path} Component={route.component} />
+                    return <DashboardTemplate key={index} exact={route.exact} path={route.path} Component={route.component} />
                 })
             }
         }
-        const renderDefaultLayout = (routes) => {
+        const renderAuthenLayout = (routes) => {
             if (routes && routes.length > 0) {
                 return routes.map((route, index) => {
-                    return <DefaultTemplate key={index} exact={route.exact} path={route.path} Component={route.component} />
+                    return <AuthenTemplate key={index} exact={route.exact} path={route.path} Component={route.component} />
                 })
             }
         }
@@ -27,7 +27,7 @@ export default class App extends Component {
             <div>
                 <Switch>
                     {renderDashboardLayout(dashboardRoutes)}
-                    {renderDefaultLayout(defaultRoutes)}
+                    {renderAuthenLayout(authenRoutes)}
                     <Route path="" component={PageNotFound} />
                 </Switch>
 

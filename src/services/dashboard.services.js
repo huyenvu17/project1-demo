@@ -25,3 +25,7 @@ export const getDashboardList = () => {
     url: `${MAIN_DOMAIN}/pets`
 }).then( resp => resp );
 };
+
+export const getPetsList = () => {
+  return API.get(MAIN_DOMAIN);
+}

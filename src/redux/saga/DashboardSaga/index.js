@@ -7,7 +7,7 @@ import * as loadingActions from '../../actions/loading.actions';
 import { MAIN_DOMAIN } from "../../../utils/config";
 
 
-function* watchFetchListDashboard(action) {
+function* watchFetchListDashboard() {
     // yield delay(1000)
     //const res = yield call(fetch, DashboardServices.getDashboardList());
     //console.log('res',res)
@@ -23,7 +23,7 @@ function* watchFetchListDashboard(action) {
         yield put(loadingActions.showLoading());
         yield delay(500)
         const res = yield call(axios.get, `${MAIN_DOMAIN}/pets`);
-        //const res = yield call(DashboardServices.getDashboardList());
+        //const res = yield call(DashboardServices.getPetsList());
         console.log(res)
         if (res && res.status == 200) {
             const {data} = res;
@@ -33,7 +33,9 @@ function* watchFetchListDashboard(action) {
         }
     } catch{
         console.log("api call failed");
-        yield put(dashboardActions.fetchListFail(data))
+        if(data){
+          yield put(dashboardActions.fetchListFail(data))
+        }
         yield put(loadingActions.hideLoading());
     } finally {
         yield put(loadingActions.hideLoading());
