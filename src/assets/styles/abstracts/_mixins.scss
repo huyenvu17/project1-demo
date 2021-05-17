@@ -55,7 +55,7 @@
         width: 100%;
         @include buttonStyle($green-default, $green-default, 8px, 20px, 10px, $tf-uppercase);
     }
-  }
+}
 
 //responsive
 @mixin responsive($screen) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Layout, Menu } from 'antd';
 import { Link, NavLink } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -41,7 +42,9 @@ export default class Header extends Component {
         return (
             <Layout.Sider trigger={null} collapsible collapsed={this.state.collapsed} className="sideheader">
                 <div className="logo">
+                <NavLink  to="/">
                   <img src={logo}/>
+                </NavLink>
                 </div>
                 <ul className="sideheader__menu">
                   <li>

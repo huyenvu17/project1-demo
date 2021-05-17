@@ -1,0 +1,5 @@
+button{
+    &:hover{
+        @include buttonHover($white-default, $green-default, $green-default);
+    }
+}

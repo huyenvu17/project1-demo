@@ -8,7 +8,6 @@ class Loading extends Component {
         super(props)
     }
     render() {
-        console.log(this.props)
         const {isLoading} = this.props;
         return (
             <Fragment>

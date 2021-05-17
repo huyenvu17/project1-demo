@@ -1,6 +1,7 @@
 const initialState = {
     isSignedIn: true,
     email: null,
+    token: null,
 }
 
 const authenReducer = (state = initialState, action) => {

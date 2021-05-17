@@ -1,6 +1,5 @@
 import { FETCH_LIST, FETCH_LIST_SUCCESS, FETCH_LIST_FAIL } from "../constants/dashboard.const";
 import { dashboardServices } from "../../services/dashboard.services";
-import * as dashboardType from '../types/dashboard.types';
 import * as dashboardActions from '../actions/dashboard.actions';
 import { domain } from '../../utils/config'
 

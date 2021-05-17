@@ -1,98 +1,20 @@
 import React, { Component, useState, useEffect } from 'react'
-import { Table, Tag, Space, Layout, Menu  } from 'antd';
+import { Table, Modal, Button, Tag, Space, Layout, Menu  } from 'antd';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import * as dashboardActions from '../../redux/actions/dashboard.actions';
 import * as loadingActions from '../../redux/actions/loading.actions';
 import * as dashboardServices from '../../services/dashboard.services';
+import AddNewPatient from './AddNewPatient';
 import { EditOutlined, DeleteOutlined, MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined,  } from '@ant-design/icons';
+  UploadOutlined, 
+  PlusOutlined,
+  PlusSquareOutlined
+} from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
-// function Dashboard() {
-//   const dispatch = useDispatch();
-//   const [columns, setColumns] = useState([
-//     {
-//       title: 'Name',
-//       dataIndex: 'name',
-//       key: 'name',
-//       render: text => <a>{text}</a>,
-//     },
-//     {
-//       title: 'Age',
-//       dataIndex: 'age',
-//       key: 'age',
-//     },
-//     {
-//       title: 'Address',
-//       dataIndex: 'address',
-//       key: 'address',
-//     },
-//     {
-//       title: 'Action',
-//       key: 'action',
-//       render: (text, record) => (
-//         <Space size="middle">
-//           <a>Invite {record.name}</a>
-//           <a>Delete</a>
-//         </Space>
-//       ),
-//     },
-//   ]);
-//   const [data, setData] = useState([
-//     {
-//       key: '1',
-//       name: 'John Brown',
-//       age: 32,
-//       address: 'New York No. 1 Lake Park',
-//     },
-//     {
-//       key: '2',
-//       name: 'Jim Green',
-//       age: 42,
-//       address: 'London No. 1 Lake Park',
-//     },
-//     {
-//       key: '3',
-//       name: 'Joe Black',
-//       age: 32,
-//       address: 'Sidney No. 1 Lake Park',
-//     },
-//   ]);
-//   const [list, setList] = useState([]);
-//   const fetchDataPosts = async () => {
-//     dispatch(dashboardActions.fetchList());
-//     console.log("Every post has been, getted", list);
-//   };
-//   useEffect(()=>{
-//     //let mounted = true;
-//     // dashboardServices.getDashboardList().then(res=>{
-//     //   console.log(res)
-//     //   if(mounted){
-//     //     setList(res)
-//     //   }
-//     // });
-//     //dispatch(dashboardActions.fetchList())
-//     fetchDataPosts()
-//     //return () => mounted = false;
-//   },[])
-  
-//   return (
-//     <div>
-      
-//       <Table columns={columns} dataSource={data} />
-//     </div>
-//   )
-// }
-// const mapStateToProps = state => ({
-//     //listData: state.dashboardreducer.listData,
-// });
-// export default connect(
-//   mapStateToProps,
-//   null
-// )(Dashboard);
 
 class Patients extends Component {
   mounted = true;
@@ -145,7 +67,9 @@ class Patients extends Component {
       ],
       data: [],
       collapsed: false,
+      isModalVisible: false
     }
+    this.showModal = this.onShowModal.bind(this);
   }
   toggle = () => {
     this.setState({
@@ -156,9 +80,13 @@ class Patients extends Component {
     const { onFetchList } = this.props
     onFetchList();
   }
-
+  onShowModal = () => {
+    this.setState({isModalVisible: true})
+}
+handleCancel = () =>{
+  this.setState({isModalVisible: false})
+}
   render() {
-    console.log('listData',this.props.listData)
     const {listData} = this.props;
     return (
       <div>
@@ -170,8 +98,18 @@ class Patients extends Component {
               minHeight: 280,
             }}
           >
+          
+          <Button type="primary" onClick={this.showModal}>
+          <PlusSquareOutlined />Add New Patient
+        </Button>
+        <Modal title="Basic Modal" visible={this.state.isModalVisible} onCancel={() => this.handleCancel()}>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
           <Table columns={this.state.columns} dataSource={listData} rowKey={listItem => listItem.id}/>
           </Content>
+          <AddNewPatient />
       </div>
     )
   }

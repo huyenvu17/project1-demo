@@ -10,7 +10,7 @@ function DashboardLayout(props){
     <div className="mainpage">
     <Layout style={{ minHeight: '100vh' }}>
       <Header />
-      <Layout className="site-layout">
+      <Layout className="mainpage__dashboard">
         <TopHeader/>
         {props.children}
         <Footer />
