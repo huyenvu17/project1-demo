@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component,Fragment } from 'react'
 import './assets/styles/main.scss';
 import { Route, Switch } from 'react-router-dom';
 import PageNotFound from './containers/PageNotFound/index';
@@ -24,14 +24,13 @@ export default class App extends Component {
             }
         }
         return (
-            <div>
+            <Fragment>
                 <Switch>
                     {renderDashboardLayout(dashboardRoutes)}
                     {renderAuthenLayout(authenRoutes)}
                     <Route path="" component={PageNotFound} />
                 </Switch>
-
-            </div>
+            </Fragment>
         )
     }
 }

@@ -1,0 +1,71 @@
+
+//text
+@mixin textStyle($color, $fontSize, $fontWeight, $text-transform) {
+    color: $color;
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    text-transform: $text-transform;
+  }
+
+//button
+@mixin buttonStyle($bg-color, $border-color, $pd-y, $pd-x, $border-radius, $text-transform) {
+    background-color: $bg-color;
+    border: 1px solid $border-color;
+    padding: $pd-y $pd-x;
+    border-radius: $border-radius;
+    text-transform: $text-transform;
+}
+@mixin buttonHover($bg-hover, $bd-hover, $cl-hover) {
+  background-color: $bg-hover;
+  border-color: $bd-hover;
+  color: $cl-hover;
+}
+
+//form
+@mixin formStyle($bg-color, $bd-color-focus) {
+    .formlayout__title{
+        @include textStyle($blue-dark, 2rem, $fw-bold, $tf-uppercase);
+        margin-bottom: 0;
+    }
+    .formlayout__subtitle{
+        @include textStyle($grey-default, 1.1rem, $fw-bold-0, $tf-initial);
+    }
+    .formlayout__inputgroup{
+        .inputgroup__label{
+            @include textStyle($blue-dark, 1rem, $fw-bold-2, $tf-initial);
+            margin-bottom: 10px;
+        }
+        .inputgroup__input{
+            border-radius: 10px;
+            padding: 10px 20px;
+            border: 1px solid $bd-color-focus;
+        }
+    }
+    .formlayout__link{
+        @include textStyle($green-default, 1rem, $fw-bold, $tf-initial);
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    .formlayout__linktext{
+        @include textStyle($blue-dark, 1rem, $fw-bold, $tf-initial);
+    }
+    .formlayout__button{
+        height: auto;
+        width: 100%;
+        @include buttonStyle($green-default, $green-default, 8px, 20px, 10px, $tf-uppercase);
+    }
+  }
+
+//responsive
+@mixin responsive($screen) {
+    @if map-has-key($map: $breakpoints, $key: $screen) {
+      $value: map-get($map: $breakpoints, $key: $screen);
+      @media screen and (max-width: $value){
+        @content;
+      }
+    }
+    @else {
+      @warn "please re-enter";
+    }
+}

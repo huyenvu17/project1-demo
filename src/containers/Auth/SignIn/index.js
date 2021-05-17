@@ -22,16 +22,16 @@ export default class SignIn extends Component {
     return (
       <Row>
         <Col span={12} offset={6}>
-          
           <Form
             name="normal_login"
-            className="authenpage__form"
+            className="authenpage__form formlayout"
             initialValues={{
               remember: true,
             }}
             onFinish={onFinish}
           >
-            <h1 className="text-center">SIGN IN</h1>
+            <h1 className="text-center formlayout__title">SIGN IN</h1>
+            <p className="text-center formlayout__subtitle">Sign in to continue to Vetspire</p>
             <Form.Item
               name="username"
               rules={[
@@ -40,9 +40,14 @@ export default class SignIn extends Component {
                   message: 'Please input your Username!',
                 },
               ]}
+              className="formlayout__inputgroup"
             >
-              <label>Username</label>
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+              <label className="inputgroup__label">Username</label>
+              <Input 
+                prefix={<UserOutlined className="site-form-item-icon" />} 
+                placeholder="Username"
+                className="inputgroup__input"
+                 />
             </Form.Item>
             <Form.Item
               name="password"
@@ -52,24 +57,30 @@ export default class SignIn extends Component {
                   message: 'Please input your Password!',
                 },
               ]}
+              className="formlayout__inputgroup"
             >
-              <label>Password</label>
+              <label className="inputgroup__label">Password</label>
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Password"
+                className="inputgroup__input"
               />
             </Form.Item>
             <Form.Item style={{textAlign: 'right'}}>
-              <a className="login-form-forgot" href="" >
+              <a className="login-form-forgot formlayout__link" href="" >
                 Forgot password?
               </a>
             </Form.Item>
             <Form.Item>
-              <Link type="primary" htmlType="submit" to="/patients" className="login-form-button">
+              
+              {/* <Link type="primary" htmlType="submit" to="/patients" className="login-form-button">
                 SIGN IN
-        </Link>
-        Or <Link href="">register now!</Link>
+              </Link> */}
+              <Button type="primary" htmlType="submit" to="/patients" className="login-form-button formlayout__button">SIGN IN</Button>
+            </Form.Item>
+            <Form.Item className="text-center formlayout__linktext">
+              <span>Don't have account?</span> <Link to="/signup" className="formlayout__link"> Sign up here!</Link>
             </Form.Item>
           </Form>
         </Col>

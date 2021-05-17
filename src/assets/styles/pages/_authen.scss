@@ -1,48 +1,47 @@
-.authenpage{
-  height: 450px;
-  background: $green-default;
-  -webkit-transform: skew(0deg, -10deg) translateY(-120px);
-  transform: skew(0deg, -10deg) translateY(-120px);
+.authenpage {
+  height: calc(100vh/1.5);
+  background: #51b78e;
+  -webkit-transform: skew(0deg, -7deg) translateY(-120px);
+  transform: skew(0deg, -7deg) translateY(-120px);
   padding: 60px 0;
-  .authenpage__logo{
+  .authenpage__logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    //margin: 2rem auto;
-    margin: -2rem auto 0;
+    margin: 2rem auto 0;
     position: absolute;
     top: 20px;
     width: 100%;
     z-index: 1000;
-    img{
+    img {
       width: 3.5rem;
     }
-    span{
+    span {
       font-weight: bold;
-    color: #fff;
-    margin-left: 0.6rem;
-    font-size: 2rem;
+      color: #fff;
+      margin-left: 0.6rem;
+      font-size: 2rem;
     }
   }
-  .authenpage_content{
-  -webkit-transform: skew(0deg, 10deg) translateY(120px);
-  transform: skew(0deg, 10deg) translateY(120px);
-  //padding: 0px 200px;
+  .authenpage_content {
+    -webkit-transform: skew(0deg, 7deg) translateY(120px);
+    transform: skew(0deg, 7deg) translateY(120px);
+    height: 100%;
   }
-  .authenpage__form{
+  .authenpage__form {
     width: 65%;
     margin: auto;
-    margin-top: 2em;
+    margin-top: 6rem;
     background: #fff;
-    padding: 2rem;
+    padding: 3rem 5rem;
     border-radius: 1.5rem;
     position: absolute;
     top: 50px;
     right: 0;
     left: 0;
-    box-shadow: 1px 2px 27px 6px rgba(0,0,0,0.15);
--webkit-box-shadow: 1px 2px 27px 6px rgba(0,0,0,0.15);
--moz-box-shadow: 1px 2px 27px 6px rgba(0,0,0,0.15);
+    box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.15);
+    @include formStyle($white-default, $green-default);
   }
 }
-

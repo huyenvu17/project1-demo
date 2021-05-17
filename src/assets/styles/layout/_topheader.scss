@@ -1,0 +1,10 @@
+.topheader{
+    background: transparent!important;
+    //padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .topheader__searchbar{
+        display: flex;
+    }
+}

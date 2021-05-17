@@ -1,7 +1,57 @@
 //colors
 $green-default: #51b78e;
 $blue-dark: #262a4c;
-$grey-default: #bcbdca;
+$grey-default: #F5F5F5; 
+$grey-1: #EBEBEB;
+$grey-2: #EBEBF5;
 $yellow-default: #eebb4d;
 $green-light: #d6efc7;
 $green-medium: #96bb7c;
+$white-default: #fff;
+
+// font-size
+$fs-0: 10px; 
+$fs-1: 11px;
+$fs-2: 12px;
+$fs-4: 14px;
+$fs-6: 16px;
+$fs-4: 18px;
+$fs-5: 20px;
+
+
+//margin
+$mg-0: 2px;
+$mg-1: 10px;
+$mg-2: 25px;
+
+//border-radius
+$border-radius: 2px;
+
+//padding
+$pd-0: 5px;
+$pd-1: 10px;
+$pd-2: 20px;
+$pd-3: 11px;
+
+// text transform
+$tf-uppercase: uppercase;
+$tf-initial: initial;
+
+
+//font-weight
+$fw-normal: normal;
+$fw-bold-0: 400;
+$fw-bold-1: 600;
+$fw-bold-2: 700;
+$fw-bold: bold;
+
+
+//break points
+$breakpoints:(
+    'extra-large': 1200px,
+    'large' : 992px,
+    'medium' : 768px,
+    'small' : 576px,
+    "tiny": 420px,
+    "super-tiny": 320px,
+)

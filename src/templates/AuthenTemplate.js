@@ -8,7 +8,7 @@ function AuthenLayout(props){
       <div className="authenpage_content">
         <div className="text-center authenpage__logo"><img src={whiteLogo} /> <span>Vetspire</span></div>
         {props.children}
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   )
