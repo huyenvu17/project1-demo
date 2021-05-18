@@ -1,5 +1,17 @@
-button{
-    &:hover{
+button {
+    &:hover {
         @include buttonHover($white-default, $green-default, $green-default);
+    }
+}
+
+.btn-green {
+    @include buttonStyle($green-default, $green-default, $white-default, 7px, 20px, 10px, $tf-uppercase);
+    &:focus {
+        @include buttonStyle($green-default, $green-default, $white-default, 7px, 20px, 10px, $tf-uppercase);
+    }
+    &:hover,
+    &:active {
+        @include buttonHover($green-default, $green-default, $white-default);
+        opacity: 0.8
     }
 }

@@ -4,3 +4,9 @@
     left: 0;
     right: 0;
 }
+
+@include responsive("medium-large"){
+    .footer{
+        bottom: -18rem;
+    }
+  }

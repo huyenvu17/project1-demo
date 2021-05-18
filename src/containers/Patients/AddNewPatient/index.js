@@ -1,42 +1,114 @@
-import React, { Component, Fragment } from 'react';
-import { Input, Space, Modal, Button, Layout, Dropdown, Menu, Image, Divider  } from 'antd';
-import { SearchOutlined, BellOutlined, UserOutlined, MailOutlined, InboxOutlined } from '@ant-design/icons';
+import React, { Component, Fragment, PropTypes } from 'react';
+import {
+  Input, Space, Modal, Button, Layout, Dropdown, Menu, Image, Divider,
+  Form, Checkbox, Row, Col
+} from 'antd';
+import { LockOutlined, SearchOutlined, BellOutlined, UserOutlined, MailOutlined, InboxOutlined } from '@ant-design/icons';
+import { reduxForm, Field } from 'redux-form';
+import {connect} from 'react-redux';
 
-export default class AddNewPatient extends Component {
+class AddNewPatient extends Component {
+  static propTypes = {
+
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      menu: (
-        <Menu onClick={() => { }}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            1st menu item
-          </Menu.Item>
-          <Menu.Item key="2" icon={<UserOutlined />}>
-            2nd menu item
-          </Menu.Item>
-          <Menu.Item key="3" icon={<UserOutlined />}>
-            3rd menu item
-          </Menu.Item>
-        </Menu>
-      ),
-      isModalVisible: false
     }
-  }
-
-
-  onSearch = (e) => {
-    console.log(e)
   }
 
   render() {
     return (
-        <Fragment>
-      <Modal title="Basic Modal" visible={this.state.isModalVisible} >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Modal>
-    </Fragment>
+      <Fragment>
+        <form
+          className="formlayout"
+        >
+          <h1 className="text-center formlayout__title">New Patient</h1>
+          <div className="formlayout__inputgroup">
+            <label className="inputgroup__label">Pet name</label>
+            <div>
+              <Field
+                name="petname"
+                component="input"
+                type="text"
+                placeholder="Pet name"
+                className="inputgroup__input"
+              />
+            </div>
+          </div>
+          <div className="formlayout__inputgroup">
+            <label className="inputgroup__label">Species</label>
+            <div>
+              <Field
+                name="species"
+                component="input"
+                type="text"
+                placeholder="Species"
+                className="inputgroup__input"
+              />
+            </div>
+          </div>
+          <div className="formlayout__inputgroup">
+            <label className="inputgroup__label">Birth Date</label>
+            <div>
+              <Field
+                name="dob"
+                component="input"
+                type="text"
+                placeholder="Birth date"
+                className="inputgroup__input"
+              />
+            </div>
+          </div>
+          <div className="formlayout__inputgroup">
+            <label className="inputgroup__label">Sex</label>
+            <div>
+              <Field
+                name="sex"
+                component="input"
+                type="text"
+                placeholder="Sex"
+                className="inputgroup__input"
+              />
+            </div>
+          </div>
+          <div className="formlayout__inputgroup">
+            <label className="inputgroup__label">Coat Color</label>
+            <div>
+              <Field
+                name="coatcolor"
+                component="input"
+                type="text"
+                placeholder="Coat Color"
+                className="inputgroup__input"
+              />
+            </div>
+          </div>
+          <div className="formlayout__inputgroup">
+            <label className="inputgroup__label">Weight</label>
+            <div>
+              <Field
+                name="weight"
+                component="input"
+                type="text"
+                placeholder="Weight"
+                className="inputgroup__input"
+              />
+            </div>
+          </div>
+        </form>
+      </Fragment>
     )
   }
 }
+
+const mapStateToProps = state => ({
+
+})
+
+const addNewPatientForm = reduxForm({
+  form: 'signup',
+})(AddNewPatient)
+
+export default connect(mapStateToProps, null)(addNewPatientForm);

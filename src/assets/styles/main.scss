@@ -8,8 +8,12 @@
 @import './layout/_header';
 @import './layout/_topheader';
 @import './layout/_footer';
+@import './layout/_content';
 //components
 @import './components/_buttons';
+@import './components/_table';
+@import './components/_modal';
+@import './components/_form';
 //pages
 @import './pages/_authen.scss';
 @import './pages/_dashboard';

@@ -1,71 +1,90 @@
-
 //text
 @mixin textStyle($color, $fontSize, $fontWeight, $text-transform) {
     color: $color;
     font-size: $fontSize;
     font-weight: $fontWeight;
     text-transform: $text-transform;
-  }
+}
 
 //button
-@mixin buttonStyle($bg-color, $border-color, $pd-y, $pd-x, $border-radius, $text-transform) {
+@mixin buttonStyle($bg-color, $border-color, $color, $pd-y, $pd-x, $border-radius, $text-transform) {
+    height: auto;
     background-color: $bg-color;
     border: 1px solid $border-color;
+    color: $color;
     padding: $pd-y $pd-x;
     border-radius: $border-radius;
     text-transform: $text-transform;
+    box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
 }
+
 @mixin buttonHover($bg-hover, $bd-hover, $cl-hover) {
-  background-color: $bg-hover;
-  border-color: $bd-hover;
-  color: $cl-hover;
+    background-color: $bg-hover;
+    border-color: $bd-hover;
+    color: $cl-hover;
 }
 
 //form
 @mixin formStyle($bg-color, $bd-color-focus) {
-    .formlayout__title{
+    .formlayout__title {
         @include textStyle($blue-dark, 2rem, $fw-bold, $tf-uppercase);
         margin-bottom: 0;
     }
-    .formlayout__subtitle{
-        @include textStyle($grey-default, 1.1rem, $fw-bold-0, $tf-initial);
+    .formlayout__subtitle {
+        @include textStyle($grey-3, 1.1rem, $fw-bold-0, $tf-initial);
     }
-    .formlayout__inputgroup{
-        .inputgroup__label{
+    .formlayout__inputgroup {
+        .inputgroup__label {
             @include textStyle($blue-dark, 1rem, $fw-bold-2, $tf-initial);
             margin-bottom: 10px;
         }
-        .inputgroup__input{
+        .inputgroup__input {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            min-width: 0;
+            padding: 4px 11px;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 14px;
+            line-height: 1.5715;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #d9d9d9;
+            border-radius: 2px;
+            transition: all 0.3s;
+            display: inline-flex;
             border-radius: 10px;
             padding: 10px 20px;
             border: 1px solid $bd-color-focus;
         }
     }
-    .formlayout__link{
+    .formlayout__link {
         @include textStyle($green-default, 1rem, $fw-bold, $tf-initial);
-        &:hover{
+        &:hover {
             text-decoration: underline;
         }
     }
-    .formlayout__linktext{
+    .formlayout__linktext {
         @include textStyle($blue-dark, 1rem, $fw-bold, $tf-initial);
     }
-    .formlayout__button{
+    .formlayout__button {
         height: auto;
         width: 100%;
-        @include buttonStyle($green-default, $green-default, 8px, 20px, 10px, $tf-uppercase);
+        @include buttonStyle($green-default, $green-default, $white-default, 8px, 20px, 10px, $tf-uppercase);
     }
 }
 
 //responsive
 @mixin responsive($screen) {
     @if map-has-key($map: $breakpoints, $key: $screen) {
-      $value: map-get($map: $breakpoints, $key: $screen);
-      @media screen and (max-width: $value){
-        @content;
-      }
+        $value: map-get($map: $breakpoints, $key: $screen);
+        @media screen and (max-width: $value) {
+            @content;
+        }
     }
     @else {
-      @warn "please re-enter";
+        @warn "please re-enter";
     }
 }

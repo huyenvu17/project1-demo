@@ -4,6 +4,7 @@ $blue-dark: #262a4c;
 $grey-default: #F5F5F5; 
 $grey-1: #EBEBEB;
 $grey-2: #EBEBF5;
+$grey-3: #BCBDCA;
 $yellow-default: #eebb4d;
 $green-light: #d6efc7;
 $green-medium: #96bb7c;
@@ -48,10 +49,12 @@ $fw-bold: bold;
 
 //break points
 $breakpoints:(
-    'extra-large': 1200px,
-    'large' : 992px,
-    'medium' : 768px,
-    'small' : 576px,
-    "tiny": 420px,
-    "super-tiny": 320px,
+    'extra-large': 1920px,
+    'large' : 1600px,
+    'medium-large' : 1440px,
+    'default' : 1366px,
+    "ipad": 1024px,
+    "mobile": 567px,
+    "tiny": 480px,
+    "super-tiny": 320px
 )

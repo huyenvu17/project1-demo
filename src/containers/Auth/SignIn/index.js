@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Form, Input, Button, Checkbox, Row, Col, Divider } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
+// const layout = {
+//   labelCol: { span: 8 },
+//   wrapperCol: { span: 16 },
+// };
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
