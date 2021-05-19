@@ -21,7 +21,7 @@ class Loading extends Component {
                             //timeout={3000}
                         />
                     </div>
-                ) : <div></div>}
+                ) : null}
             </Fragment>
         )
     }

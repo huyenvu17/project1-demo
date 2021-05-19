@@ -25,13 +25,6 @@ const notificationReducer = (state = initialState, action) => {
                 options: action.payload
             }
         }
-        case notificationConst.NOTIFICATION_SUCCESS:{
-            return {
-                ...state,
-                isVisible: true,
-                options: action.payload
-            }
-        }
         case notificationConst.NOTIFICATION_ERROR:{
             return {
                 ...state,

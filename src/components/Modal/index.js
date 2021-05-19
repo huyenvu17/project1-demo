@@ -19,7 +19,7 @@ class ModalComponent extends Component {
         if(ComponentItem) {
             return (
                 <Fragment>
-                    {ComponentItem}
+                    <ComponentItem />
                 </Fragment>
             )
         }else {

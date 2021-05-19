@@ -1,11 +1,11 @@
 import React, {Component, Fragment,useState, useEffect} from 'react';
 import { notification } from 'antd';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import * as notificationConst from '../../redux/constants/notification.const';
 
 function Notification() {
-    const {notificationType, isVisible} = useSelector(state => state.notificationReducer);
-    console.log('notificationType', notificationType, 'isVisible', isVisible);
+    const {options, isVisible} = useSelector(state => state.notificationReducer);
+    console.log('notificationType', options, 'isVisible', isVisible);
     
     const openNotificationWithIcon = (options) => {
         notification[options.type]({
@@ -16,12 +16,13 @@ function Notification() {
 
     useEffect(() => {
         if(isVisible) {
-            let option = {
+            let optionDefault = {
                 type: 'success',
-                message: 'congrats!',
-                description: 'you did it!'
+                message: 'default!',
+                description: 'default info'
             }
-            openNotificationWithIcon(option)
+            let optionItems = options ? options : optionDefault 
+            openNotificationWithIcon(optionItems)
         }
         else {
             notification.destroy()

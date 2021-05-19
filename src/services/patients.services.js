@@ -19,13 +19,13 @@ export const getPatientDetail = (patientId) => {
 }
 
 export const addNewPatient = data => {
-  return axiosService.post(`${MAIN_DOMAIN}/${patients}`, data);
+  return apiService.post(`${MAIN_DOMAIN}/${patients}`, data);
 };
 
 export const updatePatient = (data, patientId) => {
-  return axiosService.put(`${MAIN_DOMAIN}/${patients}/${patientId}`, data);
+  return apiService.put(`${MAIN_DOMAIN}/${patients}/${patientId}`, data);
 };
 
 export const deletePatient = patientId => {
-  return axiosService.delete(`${MAIN_DOMAIN}/${patients}/${patientId}`);
+  return apiService.delete(`${MAIN_DOMAIN}/${patients}/${patientId}`);
 };
