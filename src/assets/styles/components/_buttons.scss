@@ -5,13 +5,24 @@ button {
 }
 
 .btn-green {
-    @include buttonStyle($green-default, $green-default, $white-default, 7px, 20px, 10px, $tf-uppercase);
+    @include buttonStyle($green-default, $green-default, $white-default, 7px, 20px, 8px, $tf-uppercase);
     &:focus {
-        @include buttonStyle($green-default, $green-default, $white-default, 7px, 20px, 10px, $tf-uppercase);
+        @include buttonStyle($green-default, $green-default, $white-default, 7px, 20px, 8px, $tf-uppercase);
     }
     &:hover,
     &:active {
         @include buttonHover($green-default, $green-default, $white-default);
+        opacity: 0.8
+    }
+}
+.btn-grey {
+    @include buttonStyle($grey-3, $grey-3, $white-default, 7px, 20px, 8px, $tf-uppercase);
+    &:focus {
+        @include buttonStyle($grey-3, $grey-3, $white-default, 7px, 20px, 8px, $tf-uppercase);
+    }
+    &:hover,
+    &:active {
+        @include buttonHover($grey-3, $grey-3, $white-default);
         opacity: 0.8
     }
 }

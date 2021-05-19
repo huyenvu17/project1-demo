@@ -36,6 +36,7 @@
         @include textStyle($grey-3, 1.1rem, $fw-bold-0, $tf-initial);
     }
     .formlayout__inputgroup {
+        margin-bottom: 1rem; 
         .inputgroup__label {
             @include textStyle($blue-dark, 1rem, $fw-bold-2, $tf-initial);
             margin-bottom: 10px;
@@ -58,6 +59,11 @@
             border-radius: 10px;
             padding: 10px 20px;
             border: 1px solid $bd-color-focus;
+        }
+        &.buttons-group{
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            text-align: right;
         }
     }
     .formlayout__link {

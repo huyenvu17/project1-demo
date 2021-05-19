@@ -18,7 +18,9 @@ class ModalComponent extends Component {
         let ComponentItem = component;
         if(ComponentItem) {
             return (
-                <ComponentItem />
+                <Fragment>
+                    {ComponentItem}
+                </Fragment>
             )
         }else {
             return null
@@ -35,7 +37,7 @@ class ModalComponent extends Component {
         const {isVisible, options: {component}} = this.props;
         return (
             <Fragment>
-                <Modal title=" " visible={this.props.isVisible} onCancel={() => this.handleCancel()} className="modal">
+                <Modal title=" " footer={null} visible={this.props.isVisible} onCancel={() => this.handleCancel()} className="modal">
                   {this.renderModalContent(component)}
                 </Modal>
             </Fragment>
