@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import AddNewPatientForm from './AddNewPatientForm';
+import AddUpdateNewPatientForm from './AddUpdateNewPatientForm';
 import * as patientActions from '../../../redux/actions/patients.actions';
-class AddNewPatientContainer extends Component {
+class AddUpdateNewPatientContainer extends Component {
 
   onSubmitAddNewPatientForm = values => {
     console.log(values)
     this.props.onAddNewPatient(values)
   }
 
+  componentDidMount() {
+    
+  }
+
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props
+    console.log('AddUpdateNewPatientContainer', this.props.patient)
     return (
-      <AddNewPatientForm
+      <AddUpdateNewPatientForm
         onSubmit={handleSubmit(this.onSubmitAddNewPatientForm)}
         pristine={pristine}
         submitting={submitting}
@@ -26,18 +31,19 @@ class AddNewPatientContainer extends Component {
 
 
 const mapStateToProps = state => ({
-
+  patientId: state.patientsReducer.patientId,
+  initialValues: state.patientsReducer.patient
 })
 
 const mapDispatchToProps = dispatch => ({
-  onAddNewPatient: (formData) => dispatch(patientActions.addNewPatient(formData))
+  onAddNewPatient: (formData) => dispatch(patientActions.addNewPatient(formData)),
 })
 
-const addNewPatientForm = reduxForm({
+const addUpdateNewPatientForm = reduxForm({
   form: 'signup',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-})(AddNewPatientContainer)
+})(AddUpdateNewPatientContainer)
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(addNewPatientForm);
+export default connect(mapStateToProps, mapDispatchToProps)(addUpdateNewPatientForm);

@@ -79,7 +79,7 @@ class Members extends Component {
               minHeight: 280,
             }}
           >
-          <Table columns={this.state.columns} dataSource={listUsers} rowKey={listItem => listItem.id}/>
+          <Table columns={this.state.columns} dataSource={listUsers} rowKey={listItem => listItem.id} className="table"/>
           </Content>
       </div>
     )

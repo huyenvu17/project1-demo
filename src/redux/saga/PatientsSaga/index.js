@@ -1,7 +1,7 @@
 import { fork, put, call, take, takeEvery, takeLatest, delay, select } from 'redux-saga/effects';
 import axios from "axios";
 import * as patientsConst from '../../constants/patients.const';
-import {getPatientsList, addNewPatient, deletePatient} from '../../../services/patients.services';
+import {getPatientsList, addNewPatient, deletePatient, getPatientDetail} from '../../../services/patients.services';
 import * as patientsActions from '../../actions/patients.actions';
 import * as loadingActions from '../../actions/loading.actions';
 import * as notificationActions from '../../actions/notification.actions';
@@ -9,7 +9,7 @@ import * as notificationConst from '../../constants/notification.const';
 import * as modalActions from '../../actions/modal.actions';
 import { MAIN_DOMAIN } from "../../../utils/config";
 import {CODE_SUCCESS, CODE_CREATE} from '../../constants/status.const';
-
+import AddUpdateNewPatientContainer from '../../../containers/Patients/AddUpdateNewPatient';
 function* watchFetchListPatients() {
     try {
         yield put(loadingActions.showLoading());
@@ -17,7 +17,7 @@ function* watchFetchListPatients() {
         //const response = yield call(axios.get, `${MAIN_DOMAIN}/pets`);
         const response = yield call(getPatientsList);
         console.log('response', response)
-        if (response && response.status === CODE_SUCCESS) {
+        if (response && response.status === CODE_SUCCESS && response.data) {
             const {data} = response;
             console.log("fetchListSuccess")
             yield put(patientsActions.fetchListSuccess(data));
@@ -25,9 +25,30 @@ function* watchFetchListPatients() {
         }
     } catch{
         console.log("api call failed");
-        if(data){
-          yield put(patientsActions.fetchListFail(data))
+        yield put(patientsActions.fetchListFail(data))
+        yield put(loadingActions.hideLoading());
+    } finally {
+        yield put(loadingActions.hideLoading());
+    }
+}
+
+function* watchFechPatientDetail(payload){
+    const {patientId} = payload;
+    try {
+        yield put(loadingActions.showLoading());
+        yield delay(500);
+        yield put(modalActions.showModal(AddUpdateNewPatientContainer))
+        const response = yield call(getPatientDetail, patientId);
+        console.log('response', response)
+        if (response && response.status === CODE_SUCCESS && response.data) {
+            const {data} = response;
+            console.log("fetchListSuccess")
+            yield put(patientsActions.fetchPatientDetailSuccess(data));
+            yield put(loadingActions.hideLoading());
         }
+    } catch{
+        console.log("api call failed");
+        yield put(patientsActions.fetchPatientDetailFail(data))
         yield put(loadingActions.hideLoading());
     } finally {
         yield put(loadingActions.hideLoading());
@@ -127,9 +148,10 @@ function* watchDeletePatient(payload) {
 
 function* patientsSaga() {
     yield takeLatest(patientsConst.FETCH_LIST, watchFetchListPatients);
+    yield takeEvery(patientsConst.FETCH_PATIENT_DETAIL, watchFechPatientDetail)
     yield takeEvery(patientsConst.ADD_PATIENT, watchAddNewPatient);
-    yield takeLatest(patientsConst.UPDATE_PATIENT_DETAIL, watchUpdatePatient)
-    yield takeLatest(patientsConst.DELETE_PATIENT, watchDeletePatient)
+    yield takeLatest(patientsConst.UPDATE_PATIENT_DETAIL, watchUpdatePatient);
+    yield takeLatest(patientsConst.DELETE_PATIENT, watchDeletePatient);
 }
 
 export default patientsSaga;

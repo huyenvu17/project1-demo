@@ -5,12 +5,26 @@ import { domain } from '../../utils/config'
 export const fetchList = () => ({
     type: patientConst.FETCH_LIST
 })
+
 export const fetchListSuccess = (payload) => ({
     type: patientConst.FETCH_LIST_SUCCESS,
     payload
 })
 export const fetchListFail = (error) => ({
     type: patientConst.FETCH_LIST_FAIL,
+    error
+})
+
+export const fetchPatientDetail = (patientId) => ({
+    type: patientConst.FETCH_PATIENT_DETAIL,
+    patientId
+})
+export const fetchPatientDetailSuccess = (patient) => ({
+    type: patientConst.FETCH_PATIENT_DETAIL_SUCCESS,
+    patient
+})
+export const fetchPatientDetailFail = (error) => ({
+    type: patientConst.FETCH_PATIENT_DETAIL_FAIL,
     error
 })
 

@@ -2,6 +2,8 @@ import * as patientsConst from '../constants/patients.const';
 
 const initialState = {
     listData: [],
+    patientId: null,
+    patient: {},
     formData: null,
     error: null
 }
@@ -20,9 +22,17 @@ const patientsReducer = (state = initialState, action) =>{
                 listData: action.payload
             }
         }
-        case patientsConst.FETCH_LIST_FAIL:{
+        case patientsConst.FETCH_LIST_FAIL:
+        case patientsConst.FETCH_PATIENT_DETAIL_FAIL:{
             return {
-                ...state
+                ...state,
+                error: action.error
+            }
+        }
+        case patientsConst.FETCH_PATIENT_DETAIL_SUCCESS:{
+            return {
+                ...state,
+                patient: action.patient
             }
         }
         case patientsConst.ADD_PATIENT: {
@@ -48,7 +58,8 @@ const patientsReducer = (state = initialState, action) =>{
                 error: action.error
             }
         }
-        case patientsConst.DELETE_PATIENT: {
+        case patientsConst.DELETE_PATIENT:
+        case patientsConst.FETCH_PATIENT_DETAIL: {
             return {
                 ...state,
                 patientId: action.patientId

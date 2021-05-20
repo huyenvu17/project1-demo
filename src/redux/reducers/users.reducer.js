@@ -1,7 +1,16 @@
 import * as usersConst from '../constants/users.const';
 
 const initialState = {
-    listUsers: [], 
+    listUsers: [
+        {
+            username: 'admin1',
+            password: 'admin123'
+        },
+        {
+            username: 'admin0',
+            password: 'admin000'
+        }
+    ], 
     error: null
 }
 const usersReducer = (state = initialState, action) => {
