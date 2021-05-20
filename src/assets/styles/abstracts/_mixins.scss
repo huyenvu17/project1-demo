@@ -39,7 +39,6 @@
         margin-bottom: 1rem; 
         .inputgroup__label {
             @include textStyle($blue-dark, 1rem, $fw-bold-2, $tf-initial);
-            margin-bottom: 10px;
         }
         .inputgroup__input {
             position: relative;
@@ -59,6 +58,8 @@
             border-radius: 10px;
             padding: 10px 20px;
             border: 1px solid $bd-color-focus;
+            margin-top: 2px;
+            margin-bottom: 3px;
         }
         &.buttons-group{
             margin-top: 1.2rem;

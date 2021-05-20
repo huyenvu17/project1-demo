@@ -7,7 +7,7 @@ import * as notificationActions from '../../redux/actions/notification.actions';
 import * as notificationConst from '../../redux/constants/notification.const';
 import * as modalActions from '../../redux/actions/modal.actions';
 import * as modalConst from '../../redux/constants/modal.const';
-import AddNewPatientContainer from './AddNewPatient';
+import AddUpdateNewPatientContainer from './AddUpdateNewPatient';
 import UpdatePatientContainer from './UpdatePatient';
 import {
   EditOutlined, 
@@ -47,27 +47,27 @@ class Patients extends Component {
     onFetchList();
   }
   onShowModal = () => {
-    this.props.onShowModalAddNewPatient(AddNewPatientContainer);
+    this.props.onShowModalAddNewPatient(AddUpdateNewPatientContainer);
   }
   handleCancel = () => {
     this.setState({ isModalVisible: false })
   }
   handleEditPatient = (patientID) => {
     console.log(patientID)
-    this.props.onShowModalUpdatePatient(UpdatePatientContainer);
+    this.props.onShowModalUpdatePatient(patientID);
   }
   renderConfirmDeleteContent = (patient) => {
     return (
-      <div>
-        <h3>Are you sure to delete the following patient?</h3>
-        <div>
-          <p>Name: {patient.name}</p>
-          <p>Species: {patient.species}</p>
-          <p>Birth date: {patient.dob}</p>
-          <p>Breed: {patient.breed}</p>
-          <p>Sex: {patient.sex}</p>
-          <p>Coat color: {patient.coatColor}</p>
-          <p>Weight: {patient.weight}</p>
+      <div className="delete-confirm-content">
+        <h3 className="delete-confirm-title">Are you sure to delete the following patient?</h3>
+        <div className="delete-confirm-items">
+          <p><span>Name:</span> {patient.name}</p>
+          <p><span>Species:</span> {patient.species}</p>
+          <p><span>Birth date:</span> {patient.dob}</p>
+          <p><span>Breed:</span> {patient.breed}</p>
+          <p><span>Sex:</span> {patient.sex}</p>
+          <p><span>Coat color:</span> {patient.coatColor}</p>
+          <p><span>Weight:</span> {patient.weight}</p>
         </div>
       </div>
     )
@@ -87,16 +87,8 @@ class Patients extends Component {
       okText: 'OK',
       cancelText: 'Cancel',
       width: 550,
+      className: 'modal-confirm-wrapper',
       onOk: () => this.dispatchDeletePatient(patient)
-    });
-  }
-  confirm = () => {
-    Modal.confirm({
-      title: 'Confirm',
-      icon: <ExclamationCircleOutlined />,
-      content: 'Bla bla ...',
-      okText: 'OK',
-      cancelText: 'Cancel',
     });
   }
 
@@ -147,7 +139,6 @@ class Patients extends Component {
         render: (text, record) => (
 
           <Space size="middle">
-            {/* {console.log(record)} */}
             <a id={record.id} onClick={() => this.handleEditPatient(record.id)}><EditOutlined /></a>
             <a id={record.id} onClick={() => this.handleDeletePatient(record)}><DeleteOutlined /></a>
           </Space>
@@ -177,7 +168,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onFetchList: () => dispatch(patientsActions.fetchList()),
   onShowModalAddNewPatient: (component) => dispatch(modalActions.showModal(component)),
-  onShowModalUpdatePatient: (component) => dispatch(modalActions.showModal(component)),
+  onShowModalUpdatePatient: (patientId) => dispatch(patientsActions.fetchPatientDetail(patientId)),
   onDeletePatient: (patientId) => dispatch(patientsActions.deletePatient(patientId))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Patients)

@@ -1,3 +1,7 @@
 .formlayout{
     @include formStyle($white-default, $green-default);
+    .error-message{
+        color: red;
+        margin-left: 5px;
+    }
 }

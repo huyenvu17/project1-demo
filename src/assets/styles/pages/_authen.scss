@@ -45,18 +45,18 @@
     @include formStyle($white-default, $green-default);
   }
 }
-@include responsive("medium-large"){
-  .authenpage{
-    .authenpage__form{
+@include responsive("medium-large") {
+  .authenpage {
+    .authenpage__form {
       width: 80%;
       padding: 2rem 4rem;
     }
   }
 }
 
-@include responsive("default"){
+@include responsive("default") {
   .authenpage{
-    .authenpage__form{
+    .authenpage__form {
       width: 80%;
       padding: 1.5rem 3rem;
       margin-top: 3rem;
@@ -64,6 +64,6 @@
     .authenpage__logo {
       margin: 0;
       top: 0;
-  }
+    }
   }
 }

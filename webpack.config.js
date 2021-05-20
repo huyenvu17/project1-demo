@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const isDevelopment = process.env.NODE_ENV === 'development';
+const port = process.env.PORT || 3000;
 module.exports = {
     entry: ['babel-polyfill', path.join(__dirname, "src", "index.js")],
     output: { 
@@ -18,6 +19,8 @@ module.exports = {
         }  
     },
     devServer: { 
+        host: 'localhost',
+        port: port,
         contentBase: './dist',
         historyApiFallback: true
     },

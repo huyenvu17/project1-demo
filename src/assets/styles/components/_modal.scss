@@ -5,5 +5,50 @@
     }
     .ant-modal-content{
         border-radius: 10px;
+        .ant-modal-close{
+            &:hover{
+                border-radius: inherit;
+            }
+        }
+    }
+}
+.modal-confirm-wrapper {
+    .ant-modal-content {
+        border-radius: 10px;
+        .ant-modal-confirm-body {
+            .anticon-exclamation-circle {
+                float: left;
+                margin-right: 10px;
+                font-size: 28px;
+                color: $yellow-default;
+            }
+            .ant-modal-confirm-title{
+                @include textStyle($blue-dark, 1.5rem, $fw-bold, $tf-uppercase);
+            }
+            .delete-confirm-content{
+                .delete-confirm-title{
+                    @include textStyle($blue-dark, 1rem, $fw-bold, $tf-initial);
+                }
+                .delete-confirm-items{
+                    p {
+                        margin-bottom: 2px;
+                        span{
+                            font-weight: bold
+                        }
+                    }
+                    
+                }
+            }
+        }
+        .ant-modal-confirm-btns{
+            button {
+                &:first-child{
+                    @extend .btn-grey
+                }
+                &:last-child{
+                    @extend .btn-green
+                }
+            }
+        }
     }
 }
