@@ -1,7 +1,7 @@
 import { fork, put, call, take, takeEvery, takeLatest, delay, select } from 'redux-saga/effects';
 import axios from "axios";
 import * as patientsConst from '../../constants/patients.const';
-import {getPatientsList, addNewPatient, deletePatient, getPatientDetail} from '../../../services/patients.services';
+import {getPatientsList, addNewPatient, deletePatient, getPatientDetail, updatePatient} from '../../../services/patients.services';
 import * as patientsActions from '../../actions/patients.actions';
 import * as loadingActions from '../../actions/loading.actions';
 import * as notificationActions from '../../actions/notification.actions';
@@ -9,7 +9,7 @@ import * as notificationConst from '../../constants/notification.const';
 import * as modalActions from '../../actions/modal.actions';
 import { MAIN_DOMAIN } from "../../../utils/config";
 import {CODE_SUCCESS, CODE_CREATE} from '../../constants/status.const';
-import AddUpdateNewPatientContainer from '../../../containers/Patients/AddUpdateNewPatient';
+import AddUpdatePatientContainer from '../../../containers/Patients/AddUpdatePatient';
 function* watchFetchListPatients() {
     try {
         yield put(loadingActions.showLoading());
@@ -37,12 +37,12 @@ function* watchFechPatientDetail(payload){
     try {
         yield put(loadingActions.showLoading());
         yield delay(500);
-        yield put(modalActions.showModal(AddUpdateNewPatientContainer))
+        yield put(modalActions.showModal(AddUpdatePatientContainer))
         const response = yield call(getPatientDetail, patientId);
         console.log('response', response)
         if (response && response.status === CODE_SUCCESS && response.data) {
             const {data} = response;
-            console.log("fetchListSuccess")
+            console.log("fetch patient detail success", data)
             yield put(patientsActions.fetchPatientDetailSuccess(data));
             yield put(loadingActions.hideLoading());
         }
@@ -84,31 +84,45 @@ function* watchAddNewPatient({formData}) {
     }
 }
 
-function* watchUpdatePatient() {
+function* watchUpdatePatient({formData}) {
     console.log('watchAddNewPatient')
     console.log('formData', formData)
+    const {id, name, dob, breed, coatColor, sex,species, weight} = formData
+    let updateValues = {
+        id,
+        name,
+        dob,
+        breed,
+        coatColor,
+        sex,
+        species,
+        species,
+        weight
+    }
+    console.log(id)
     try {
         yield put(loadingActions.showLoading());
         yield delay(1500)
         console.log('api here')
-        const response = yield call(addNewPatient, formData);
+        const response = yield call(updatePatient, updateValues, id);
         //const response = yield call(axios.post, `${MAIN_DOMAIN}/pets`, formData);
         console.log('response', response)
-        if(response && response.status === CODE_CREATE){
+        if(response && response.status === CODE_SUCCESS){
+            console.log('hideLoading')
             yield put(loadingActions.hideLoading());
+            console.log('show noti')
             yield put(notificationActions.showNotificationSuccess({
                 type: notificationConst.STATUS_SUCCESS,
                 message: 'Success',
-                description: 'New patient added successfully!'
+                description: 'Patient updated successfully!'
             }));
-            yield put(patientsActions.addNewPatientSuccess());
-            yield put(modalActions.hideModal());
+            console.log('update patient')
+            yield put(patientsActions.updatePatientSuccess());
             yield call(getPatientsList);
-            window.location.reload();
         }
     }catch {
         yield put(loadingActions.hideLoading());
-        yield put(patientsActions.addNewPatientFail());
+        yield put(patientsActions.updatePatientFail());
     }finally {
         yield put(loadingActions.hideLoading());
     }

@@ -71,3 +71,11 @@ export const deletePatientFail = (error) => ({
     error
 })
 
+export const resetPatientForm = () => ({
+    type: patientConst.RESET_PATIENT_FORM
+})
+
+export const initUpdatePatientForm = (isUpdate) => ({
+    type: patientConst.INIT_UPDATE_PATIENT_FORM,
+    isUpdate
+})

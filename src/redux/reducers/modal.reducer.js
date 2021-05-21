@@ -3,7 +3,8 @@ import * as modalConst from '../constants/modal.const';
 const initialState = {
     isVisible: false,
     options: {
-        component: null
+        component: null,
+        propItems: null
     }
 }
 const modalReducer = (state = initialState, action) => {
@@ -14,7 +15,8 @@ const modalReducer = (state = initialState, action) => {
                 ...state,
                 isVisible: true,
                 options: {
-                    component: action.component
+                    component: action.component,
+                    propItems: action.propItems
                 }
             }
         }

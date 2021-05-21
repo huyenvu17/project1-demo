@@ -1,8 +1,9 @@
 import * as modalConst from '../constants/modal.const';
 
-export const showModal = (component) => ({
+export const showModal = (component, propItems) => ({
     type: modalConst.SHOW_MODAL,
-    component
+    component,
+    propItems
 })
 
 export const hideModal = () => ({

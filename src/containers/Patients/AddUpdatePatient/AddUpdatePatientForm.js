@@ -7,7 +7,7 @@ import { LockOutlined, SearchOutlined, BellOutlined, UserOutlined, MailOutlined,
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import validation from '../../../helpers/validations';
-class AddUpdateNewPatientForm extends Component {
+class AddUpdatePatientForm extends Component {
   static propTypes = {
 
   }
@@ -34,6 +34,8 @@ class AddUpdateNewPatientForm extends Component {
       isChecked: e.target.checked
     });
   };
+
+
   renderField = ({ input, label, type, meta: { touched, error, warning } }) => {
     const {gender} = this.state
     return (
@@ -63,15 +65,15 @@ class AddUpdateNewPatientForm extends Component {
   }
 
   render() {
-    const { pristine, reset, submitting, onSubmit } = this.props
-    console.log(this.props)
+    const { pristine, reset, submitting, onSubmit, patientId, isUpdate } = this.props
+    console.log('isEdit', patientId)
     return (
       <Fragment>
         <form
           className="formlayout"
           onSubmit={onSubmit}
         >
-          <h1 className="text-center formlayout__title">New Patient</h1>
+          <h1 className="text-center formlayout__title">{!isUpdate ? 'New Patient' : 'Update Patient'}</h1>
           <div className="formlayout__inputgroup">
             <label className="inputgroup__label">Pet name</label>
             <div>
@@ -80,7 +82,6 @@ class AddUpdateNewPatientForm extends Component {
                 label="Pet name"
                 component={this.renderField}
                 type="text"
-                placeholder="Pet name"
                 className="inputgroup__input"
                 validate={validation.required}
               />
@@ -100,7 +101,7 @@ class AddUpdateNewPatientForm extends Component {
               />
             </div>
           </div>
-          <div className="formlayout__inputgroup">
+          {/* <div className="formlayout__inputgroup">
             <label className="inputgroup__label">Birth Date</label>
             <div>
               <Field
@@ -113,7 +114,7 @@ class AddUpdateNewPatientForm extends Component {
                 validate={validation.required}
               />
             </div>
-          </div>
+          </div> */}
           <div className="formlayout__inputgroup">
             <label className="inputgroup__label">Breed</label>
             <div>
@@ -179,7 +180,7 @@ class AddUpdateNewPatientForm extends Component {
               className="btn-green"
               disabled={submitting}
             >
-              Add new patient
+              {!isUpdate ? 'Add new patient' : 'Update Patient'}
             </button>
           </div>
         </form>
@@ -189,4 +190,4 @@ class AddUpdateNewPatientForm extends Component {
 }
 
 
-export default AddUpdateNewPatientForm;
+export default AddUpdatePatientForm;

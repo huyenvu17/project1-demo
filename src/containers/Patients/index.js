@@ -7,8 +7,7 @@ import * as notificationActions from '../../redux/actions/notification.actions';
 import * as notificationConst from '../../redux/constants/notification.const';
 import * as modalActions from '../../redux/actions/modal.actions';
 import * as modalConst from '../../redux/constants/modal.const';
-import AddUpdateNewPatientContainer from './AddUpdateNewPatient';
-import UpdatePatientContainer from './UpdatePatient';
+import AddUpdatePatientContainer from './AddUpdatePatient';
 import {
   EditOutlined, 
   DeleteOutlined, 
@@ -34,28 +33,41 @@ class Patients extends Component {
       collapsed: false,
       isModalVisible: false
     }
-    this.showModal = this.onShowModal.bind(this);
+    this.showAddPatientModal = this.onShowAddPatientModal.bind(this);
   }
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
     });
   };
+
+  componentWillUnmount(){
+    console.log('componentWillUnMount')
+    this.props.resetPatientForm();
+  }
+
   componentDidMount() {
     const { onFetchList } = this.props
     console.log(this.props)
     onFetchList();
   }
-  onShowModal = () => {
-    this.props.onShowModalAddNewPatient(AddUpdateNewPatientContainer);
+
+  onShowAddPatientModal = () => {
+    this.props.resetPatientForm();
+    this.props.onShowModalAddUpdatePatient(AddUpdatePatientContainer);
   }
+
   handleCancel = () => {
     this.setState({ isModalVisible: false })
   }
-  handleEditPatient = (patientID) => {
-    console.log(patientID)
-    this.props.onShowModalUpdatePatient(patientID);
+  
+  handleEditPatient = (patientId) => {
+    console.log('patientId', patientId);
+    let isEdit = true;
+    this.props.initUpdatePatientForm(isEdit);
+    this.props.onShowModalAddUpdatePatient(AddUpdatePatientContainer, patientId);
   }
+
   renderConfirmDeleteContent = (patient) => {
     return (
       <div className="delete-confirm-content">
@@ -72,12 +84,14 @@ class Patients extends Component {
       </div>
     )
   }
+
   dispatchDeletePatient = (patient) => {
      const {id} = patient;
       if(id){
         this.props.onDeletePatient(id)
       }
   }
+
   handleDeletePatient = (patient) => {
     console.log(patient)
     Modal.confirm({
@@ -155,7 +169,7 @@ class Patients extends Component {
         }}
       >
         <h1 className="content__header">Patients</h1>
-        <Button onClick={this.showModal} className="btn-green"><UserAddOutlined /> Add New Patient</Button>
+        <Button onClick={this.showAddPatientModal} className="btn-green"><UserAddOutlined /> Add New Patient</Button>
         <Table columns={columns} dataSource={listData} rowKey={listItem => listItem.id} className="table" />
       </Content>
     )
@@ -167,8 +181,9 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = dispatch => ({
   onFetchList: () => dispatch(patientsActions.fetchList()),
-  onShowModalAddNewPatient: (component) => dispatch(modalActions.showModal(component)),
-  onShowModalUpdatePatient: (patientId) => dispatch(patientsActions.fetchPatientDetail(patientId)),
-  onDeletePatient: (patientId) => dispatch(patientsActions.deletePatient(patientId))
+  onShowModalAddUpdatePatient: (component, props) => dispatch(modalActions.showModal(component, props)),
+  onDeletePatient: (patientId) => dispatch(patientsActions.deletePatient(patientId)),
+  initUpdatePatientForm: (isEdit) => dispatch(patientsActions.initUpdatePatientForm(isEdit)), 
+  resetPatientForm: () => dispatch(patientsActions.resetPatientForm())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Patients)

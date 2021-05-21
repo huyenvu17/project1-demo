@@ -44,6 +44,7 @@ class ModalComponent extends Component {
                     onCancel={() => this.handleCancel()} 
                     className="modal"
                     maskClosable={false}
+                    destroyOnClose={true}
                     >
                   {this.renderModalContent(component)}
                 </Modal>
