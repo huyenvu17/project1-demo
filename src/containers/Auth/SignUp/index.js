@@ -1,7 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Form, Input, Button, Checkbox, Row, Col, Divider } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { reduxForm, Field } from 'redux-form';
+import validation from '../../../helpers/validations';
+import * as userActions from '../../../redux/actions/users.actions'
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -10,7 +14,22 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 const style = { background: '#0092ff', padding: '8px 0' };
-export default class SignUp extends Component {
+class SignUp extends Component {
+  renderField = ({ input, label, type, meta: { touched, error, warning } }) => {
+    return (
+      <Fragment>
+        <div>
+          <input {...input} placeholder={label} type={type} className="inputgroup__input" />
+          {touched && ((error && <span className="text-danger error-message">{error}</span>) || (warning && <span>{warning}</span>))}
+        </div>
+      </Fragment>
+    )
+  }
+  handleSignUpUser = (values) => {
+    console.log(values);
+    this.props.onSignUpUser(values)
+  }
+
   render() {
     const onFinish = (values) => {
       console.log('Success:', values);
@@ -19,101 +38,101 @@ export default class SignUp extends Component {
     const onFinishFailed = (errorInfo) => {
       console.log('Failed:', errorInfo);
     };
+
+    const { pristine, reset, submitting, handleSubmit } = this.props
     return (
       <Row>
         <Col span={12} offset={6}>
-          <Form
-            name="normal_login"
+          <form
             className="authenpage__form formlayout"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
+            onSubmit={handleSubmit(this.handleSignUpUser)}
           >
             <h1 className="text-center formlayout__title">SIGN UP</h1>
             <p className="text-center formlayout__subtitle">Easy to sign up with simple steps</p>
-            <Form.Item
-              name="fullname"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Full Name!',
-                },
-              ]}
-              className="formlayout__inputgroup"
-            >
-              <label className="inputgroup__label">Fullname</label>
-              <Input 
-                prefix={<UserOutlined className="site-form-item-icon" />} 
-                placeholder="Full Name"
-                className="inputgroup__input"
-                 />
-            </Form.Item>
-            <Form.Item
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Username!',
-                },
-              ]}
-              className="formlayout__inputgroup"
-            >
+            <div className="formlayout__inputgroup">
+              <label className="inputgroup__label">Full Name</label>
+              <div>
+                <Field
+                  name="fullname"
+                  label="Fullname"
+                  component={this.renderField}
+                  type="text"
+                  className="inputgroup__input"
+                  validate={validation.required}
+                />
+              </div>
+            </div>
+            <div className="formlayout__inputgroup">
               <label className="inputgroup__label">Username</label>
-              <Input 
-                prefix={<UserOutlined className="site-form-item-icon" />} 
-                placeholder="Username"
-                className="inputgroup__input"
-                 />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Password!',
-                },
-              ]}
-              className="formlayout__inputgroup"
-            >
+              <div>
+                <Field
+                  name="username"
+                  label="Username"
+                  component={this.renderField}
+                  type="text"
+                  className="inputgroup__input"
+                  validate={validation.required}
+                />
+              </div>
+            </div>
+            <div className="formlayout__inputgroup">
               <label className="inputgroup__label">Password</label>
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Password"
-                className="inputgroup__input"
-              />
-            </Form.Item>
-            <Form.Item
-              name="cornfirmpassword"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Cornfirm password!',
-                },
-              ]}
-              className="formlayout__inputgroup"
-            >
+              <div>
+                <Field
+                  name="password"
+                  label="Password"
+                  component={this.renderField}
+                  type="password"
+                  className="inputgroup__input"
+                  validate={validation.required}
+                />
+              </div>
+            </div>
+            <div className="formlayout__inputgroup">
               <label className="inputgroup__label">Confirm Password</label>
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Cornfirm password"
-                className="inputgroup__input"
-              />
-            </Form.Item>
-            <Form.Item>
-              {/* <Link type="primary" htmlType="submit" to="/patients" className="login-form-button">
-                SIGN IN
-              </Link> */}
-              <Button type="primary" htmlType="submit" to="/patients" className="login-form-button formlayout__button">SIGN UP</Button>
-            </Form.Item>
-            <Form.Item className="text-center formlayout__linktext">
+              <div>
+                <Field
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  component={this.renderField}
+                  type="password"
+                  className="inputgroup__input"
+                  validate={validation.required}
+                />
+              </div>
+            </div>
+            <div className="formlayout__inputgroup buttons-group" >
+              <button type="submit"
+                className="btn-green"
+                disabled={submitting}
+              >
+                Sign up
+        </button>
+            </div>
+            <div className="text-center formlayout__linktext">
               <span>Already have account?</span> <Link to="/signin" className="formlayout__link"> Sign in</Link>
-            </Form.Item>
-          </Form>
+            </div>
+          </form>
         </Col>
       </Row>
+
+
     );
   }
 }
+
+
+const mapStateToProps = state => ({
+  //signup: state.signup,
+})
+const mapDispatchToProps = dispatch => ({
+  onSignUpUser: (data) => dispatch(userActions.signUpUser(data))
+})
+const connected = connect(mapStateToProps, mapDispatchToProps)(SignUp)
+
+const signUpForm = reduxForm({
+  form: 'signup',
+})(connected)
+
+
+export default signUpForm;

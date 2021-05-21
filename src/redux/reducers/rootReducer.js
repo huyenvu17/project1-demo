@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
     form,
     modalReducer,
     notificationReducer,
-    authenReducer,
+    //authenReducer,
     loadingReducer,
     patientsReducer,
     usersReducer

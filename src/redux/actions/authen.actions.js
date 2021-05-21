@@ -1,19 +1,33 @@
-import { GET_NEW, FETCH_NEWS_SUCESS, FETCH_NEWS_FAIL, FETCH_NEWS_BEGIN, FETCH_NEWS } from "../constants/index";
 
-export const getNews = () => ({
-    type: GET_NEW
+import * as userConst from '../constants/users.const';
+
+export const signUpUser = (payload) => ({
+    type: userConst.SIGNUP_USER,
+    payload
 })
 
-export const fetchNews = () => ({
-    type: FETCH_NEWS
+export const signUpUserSuccess = (payload) => ({
+    type: userConst.SIGNUP_USER_SUCCESS,
+    payload
 })
 
-export const fetchNewsSuccess = (data) => ({
-    type: FETCH_NEWS_SUCCESS,
-    payload: data
+export const signUpUserFail = (error) => ({
+    type: userConst.SIGNUP_USER_FAIL,
+    error
 })
 
-export const fetchNewsFail = (error) => ({
-    type: FETCH_NEWS_FAIL,
-    payload: error
+export const signInUser = (payload) => ({
+    type: userConst.SIGNIN_USER,
+    payload
 })
+
+export const signInUserSuccess = (payload) => ({
+    type: userConst.SIGNIN_USER_SUCCESS,
+    payload
+})
+
+export const signInUserFail = (error) => ({
+    type: userConst.SIGNIN_USER_FAIL,
+    error
+})
+

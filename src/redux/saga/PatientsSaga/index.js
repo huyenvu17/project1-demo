@@ -9,7 +9,6 @@ import * as notificationConst from '../../constants/notification.const';
 import * as modalActions from '../../actions/modal.actions';
 import { MAIN_DOMAIN } from "../../../utils/config";
 import {CODE_SUCCESS, CODE_CREATE} from '../../constants/status.const';
-import AddUpdatePatientContainer from '../../../containers/Patients/AddUpdatePatient';
 function* watchFetchListPatients() {
     try {
         yield put(loadingActions.showLoading());
@@ -37,7 +36,6 @@ function* watchFechPatientDetail(payload){
     try {
         yield put(loadingActions.showLoading());
         yield delay(500);
-        yield put(modalActions.showModal(AddUpdatePatientContainer))
         const response = yield call(getPatientDetail, patientId);
         console.log('response', response)
         if (response && response.status === CODE_SUCCESS && response.data) {
