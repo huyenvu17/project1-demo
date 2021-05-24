@@ -1,18 +1,22 @@
 .authenpage {
-  height: calc(100vh/1.5);
-  background: #51b78e;
-  -webkit-transform: skew(0deg, -7deg) translateY(-120px);
-  transform: skew(0deg, -7deg) translateY(-120px);
-  padding: 60px 0;
+  position: relative;
+  height: 100%;
+  &::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: calc(100vh/1.5);
+    background: #51b78e;
+    -webkit-transform: skew(0deg, -7deg) translateY(-120px);
+    transform: skew(0deg, -7deg) translateY(-120px);
+    padding: 60px 0;
+  }
   .authenpage__logo {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 2rem auto 0;
-    position: absolute;
-    top: 20px;
     width: 100%;
-    z-index: 1000;
     img {
       width: 3.5rem;
     }
@@ -24,9 +28,9 @@
     }
   }
   .authenpage_content {
-    -webkit-transform: skew(0deg, 7deg) translateY(120px);
-    transform: skew(0deg, 7deg) translateY(120px);
     height: 100%;
+    width: 100%;
+    position: fixed;
   }
   .authenpage__form {
     width: 65%;
@@ -35,7 +39,7 @@
     background: #fff;
     padding: 3rem 5rem;
     border-radius: 1.5rem;
-    position: absolute;
+    //position: absolute;
     top: 50px;
     right: 0;
     left: 0;
@@ -57,9 +61,9 @@
 @include responsive("default") {
   .authenpage{
     .authenpage__form {
-      width: 80%;
-      padding: 1.5rem 3rem;
-      margin-top: 3rem;
+      width: 65%;
+      padding: 1.5rem 2.5rem;
+      margin-top: 1.8rem;
       .buttons-group{
         button{
           width: 100%;
