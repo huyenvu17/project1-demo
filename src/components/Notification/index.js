@@ -5,12 +5,13 @@ import * as notificationConst from '../../redux/constants/notification.const';
 
 function Notification() {
     const {options, isVisible} = useSelector(state => state.notificationReducer);
-    console.log('notificationType', options, 'isVisible', isVisible);
+    //console.log('notificationType', options, 'isVisible', isVisible);
     
     const openNotificationWithIcon = (options) => {
         notification[options.type]({
           message: options.message,
           description: options.description,
+          duration: 1.5,
         });
     };
 

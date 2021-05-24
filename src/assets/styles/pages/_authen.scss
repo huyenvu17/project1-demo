@@ -1,24 +1,23 @@
 .authenpage {
-  position: relative;
-  height: 100%;
   &::before{
     content: "";
     position: absolute;
     width: 100%;
     height: calc(100vh/1.5);
     background: #51b78e;
-    -webkit-transform: skew(0deg, -7deg) translateY(-120px);
-    transform: skew(0deg, -7deg) translateY(-120px);
+    -webkit-transform: skew(0deg, -7deg) translateY(-200px);
+    transform: skew(0deg, -7deg) translateY(-200px);
     padding: 60px 0;
   }
   .authenpage__logo {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2rem auto 0;
+    padding-top: 5rem;
     width: 100%;
     img {
-      width: 3.5rem;
+      width: 4rem;
     }
     span {
       font-weight: bold;
@@ -28,33 +27,44 @@
     }
   }
   .authenpage_content {
-    height: 100%;
     width: 100%;
-    position: fixed;
+    .authenpage__form {
+      width: 65%;
+      margin: auto;
+      margin-top: 3rem;
+      background: #fff;
+      padding: 3rem 5rem;
+      border-radius: 1.5rem;
+      top: 50px;
+      right: 0;
+      left: 0;
+      box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.15);
+      -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.15);
+      @include formStyle($white-default, $green-default);
+      &.formlayout{
+        .formlayout__inputgroup.buttons-group{
+          button{
+            width: 100%;
+          }
+        }
+      }
+    }
   }
-  .authenpage__form {
-    width: 65%;
-    margin: auto;
-    margin-top: 6rem;
-    background: #fff;
-    padding: 3rem 5rem;
-    border-radius: 1.5rem;
-    //position: absolute;
-    top: 50px;
-    right: 0;
-    left: 0;
-    box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.15);
-    -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.15);
-    @include formStyle($white-default, $green-default);
-  }
+
 }
 @include responsive("medium-large") {
   .authenpage {
-    .authenpage__form {
-      width: 80%;
-      padding: 2rem 4rem;
+    .authenpage__logo{
+      //margin: 2rem auto 0;
     }
+    .authenpage_content{
+      .authenpage__form {
+        width: 80%;
+        padding: 2rem 4rem;
+      }
+    }
+
   }
 }
 
@@ -71,8 +81,7 @@
       }
     }
     .authenpage__logo {
-      margin: 0;
-      top: 0;
+      padding-top: 3rem;
     }
   }
 }

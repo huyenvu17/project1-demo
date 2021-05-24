@@ -1,14 +1,14 @@
 
 import * as userConst from '../constants/users.const';
 
-export const signUpUser = (payload) => ({
+export const signUpUser = (user) => ({
     type: userConst.SIGNUP_USER,
-    payload
+    user
 })
 
-export const signUpUserSuccess = (payload) => ({
+export const signUpUserSuccess = (user) => ({
     type: userConst.SIGNUP_USER_SUCCESS,
-    payload
+    user
 })
 
 export const signUpUserFail = (error) => ({
@@ -16,14 +16,14 @@ export const signUpUserFail = (error) => ({
     error
 })
 
-export const signInUser = (payload) => ({
+export const signInUser = (user) => ({
     type: userConst.SIGNIN_USER,
-    payload
+    user
 })
 
-export const signInUserSuccess = (payload) => ({
+export const signInUserSuccess = (user) => ({
     type: userConst.SIGNIN_USER_SUCCESS,
-    payload
+    user
 })
 
 export const signInUserFail = (error) => ({

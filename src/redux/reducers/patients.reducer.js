@@ -8,17 +8,17 @@ const initialState = {
     error: null,
     isUpdate: false
 }
-// const formData = {
-//     id: "",
-//     name: "",
-//     breed: "",
-//     coatColor: "",
-//     coatcolor: "",
-//     dob: "",
-//     sex: "",
-//     species: "",
-//     weight: ""
-// }
+const formInputData = {
+    id: "",
+    name: "",
+    breed: "",
+    coatColor: "",
+    coatcolor: "",
+    dob: "",
+    sex: "",
+    species: "",
+    weight: ""
+}
 const patientsReducer = (state = initialState, action) => {
     const {
         type
@@ -106,7 +106,7 @@ const patientsReducer = (state = initialState, action) => {
             {
                 return {
                     ...state,
-                    //...initialState,
+                    ...formInputData,
                 }
             }
         default:

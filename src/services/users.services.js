@@ -14,3 +14,7 @@ export const fetchUsersDetail = (id) => {
 export const addNewUser = (user) => {
     return axios.post(`${MAIN_DOMAIN}/users`, user);
 }
+
+export const signInUser = (username, password) => {
+    return axios.get(`${MAIN_DOMAIN}/users?username=${username}&password=${password}`);
+}

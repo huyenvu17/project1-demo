@@ -5,11 +5,11 @@ import whiteLogo from '../assets/images/white-logo.svg';
 function AuthenLayout(props){
   return (
     <div className="authenpage">
+      <div className="text-center authenpage__logo"><img src={whiteLogo} /> <span>Vetspire</span></div>
       <div className="authenpage_content">
-        <div className="text-center authenpage__logo"><img src={whiteLogo} /> <span>Vetspire</span></div>
         {props.children}
-        <Footer />
       </div>
+      <Footer />
     </div>
   )
 } 

@@ -5,7 +5,13 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import validation from '../../../helpers/validations';
-import * as userActions from '../../../redux/actions/users.actions'
+import { omit } from 'lodash';
+import * as userActions from '../../../redux/actions/users.actions';
+import Icon from '@ant-design/icons';
+import {
+  EyeOutlined,
+  EyeInvisibleOutlined
+} from '@ant-design/icons';
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -15,30 +21,52 @@ const tailLayout = {
 };
 const style = { background: '#0092ff', padding: '8px 0' };
 class SignUp extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      passwordShown: true,
+      confirmPasswordShown: true
+    }
+  }
+  togglePasswordVisiblity = (label) => {
+    if(label === 'Password'){
+      this.setState({ passwordShown: !this.state.passwordShown})
+      this.passwordRef.focus();
+    }  else{
+      this.setState({ confirmPasswordShown: !this.state.confirmPasswordShown})
+      this.confirmPasswordRef.focus();
+    }
+  }
+
   renderField = ({ input, label, type, meta: { touched, error, warning } }) => {
+    let passwordField = type == 'password' ? { ...omit(input, ['value']) } : { ...input };
     return (
       <Fragment>
         <div>
-          <input {...input} placeholder={label} type={type} className="inputgroup__input" />
+          {type==='password' ? (
+            <div className="password__field">
+              <input autoComplete="off" {...passwordField} 
+              ref={(input) => label === 'Password' ? this.passwordRef = input : this.confirmPasswordRef = input} 
+              placeholder={label} 
+              type={label === 'Password' ? (this.state.passwordShown ? 'password' : 'text') : (this.state.confirmPasswordShown ? 'password' : 'text')} 
+              className="inputgroup__input" 
+              />
+              <Icon className="password__icon" 
+              component={(this.state.passwordShown || this.state.confirmPasswordShown) ? EyeOutlined : EyeInvisibleOutlined} onClick={() => this.togglePasswordVisiblity(label)}/>
+            </div>
+          ): (
+            <input {...input} placeholder={label} type={type} className="inputgroup__input" />
+          )}
           {touched && ((error && <span className="text-danger error-message">{error}</span>) || (warning && <span>{warning}</span>))}
         </div>
       </Fragment>
     )
   }
   handleSignUpUser = (values) => {
-    console.log(values);
     this.props.onSignUpUser(values)
   }
 
   render() {
-    const onFinish = (values) => {
-      console.log('Success:', values);
-    };
-
-    const onFinishFailed = (errorInfo) => {
-      console.log('Failed:', errorInfo);
-    };
-
     const { pristine, reset, submitting, handleSubmit } = this.props
     return (
       <Row>
@@ -84,7 +112,7 @@ class SignUp extends Component {
                   component={this.renderField}
                   type="password"
                   className="inputgroup__input"
-                  validate={validation.required}
+                  validate={[validation.required, validation.minLength6]}
                 />
               </div>
             </div>
@@ -92,12 +120,12 @@ class SignUp extends Component {
               <label className="inputgroup__label">Confirm Password</label>
               <div>
                 <Field
-                  name="confirmPassword"
+                  name="confirmpassword"
                   label="Confirm Password"
                   component={this.renderField}
                   type="password"
                   className="inputgroup__input"
-                  validate={validation.required}
+                  validate={[validation.required, validation.matchPassword, validation.minLength6]}
                 />
               </div>
             </div>

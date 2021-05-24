@@ -1,13 +1,16 @@
 import { fork, put, call, take, takeEvery, takeLatest, delay } from 'redux-saga/effects';
 import axios from "axios";
+import { push } from 'connected-react-router';
+import {history} from '../../../utils/history';
 import * as usersConst from '../../constants/users.const';
 import * as usersActions from '../../actions/users.actions';
 import * as loadingActions from '../../actions/loading.actions';
 import { MAIN_DOMAIN } from "../../../utils/config";
 import {CODE_SUCCESS, CODE_CREATE} from '../../constants/status.const';
-import { addNewUser } from '../../../services/users.services';
+import { addNewUser, signInUser } from '../../../services/users.services';
 import * as notificationActions from '../../actions/notification.actions';
 import * as notificationConst from '../../constants/notification.const';
+import {generateRadomToken} from '../../../helpers/randomTokenGenerator.js';
 function* watchFetchListUser() {
     try {
         yield put(loadingActions.showLoading());
@@ -29,16 +32,11 @@ function* watchFetchListUser() {
     }
 }
 
-function* watchSignUpUser({payload}){
-    console.log('payload saga', payload)
-    //addNewUser
+function* watchSignUpUser({user}){
     try {
         yield put(loadingActions.showLoading());
         yield delay(1500)
-        console.log('api here')
-        const response = yield call(addNewUser, payload);
-        //const response = yield call(axios.post, `${MAIN_DOMAIN}/pets`, formData);
-        console.log('response', response)
+        const response = yield call(addNewUser, user);
         if(response && response.status === CODE_CREATE){
             yield put(loadingActions.hideLoading());
             yield put(notificationActions.showNotificationSuccess({
@@ -47,6 +45,7 @@ function* watchSignUpUser({payload}){
                 description: 'Sign up successfully!'
             }));
             yield put(usersActions.signUpUserSuccess());
+            history.push('/signin');
         }
     }catch {
         yield put(loadingActions.hideLoading());
@@ -55,9 +54,50 @@ function* watchSignUpUser({payload}){
         yield put(loadingActions.hideLoading());
     }
 }
-
+function* watchSignInUser({user}){
+    console.log('user', user)
+    let username = user.username;
+    let password = user.password;
+    try {
+        yield put(loadingActions.showLoading());
+        yield delay(1500)
+        const response = yield call(signInUser, username, password);
+        console.log(response)
+        if(response && response.status === CODE_SUCCESS && response.data.length > 0){
+            const token = generateRadomToken(60);
+            console.log('token', token)
+            let userInfo = {
+                username: username,
+                token: token
+            }
+            yield put(loadingActions.hideLoading());
+            yield put(notificationActions.showNotificationSuccess({
+                type: notificationConst.STATUS_SUCCESS,
+                message: 'Success',
+                description: 'Sign in successfully!'
+            }));
+            yield put(usersActions.signInUserSuccess(user));
+            localStorage.setItem("userInfo", JSON.stringify(userInfo));
+            history.push('/');
+        }else{
+            yield put(loadingActions.hideLoading());
+            yield put(notificationActions.showNotificationError({
+                type: notificationConst.STATUS_ERROR,
+                message: 'Error',
+                description: 'username or password is incorrect!'
+            }));
+            yield put(usersActions.signInUserFail());
+        }
+    }catch {
+        yield put(loadingActions.hideLoading());
+        yield put(usersActions.signInUserFail());
+    }finally {
+        yield put(loadingActions.hideLoading());
+    }
+}
 function* usersSaga() {
     yield takeLatest(usersConst.FETCH_USERS, watchFetchListUser);
     yield takeLatest(usersConst.SIGNUP_USER, watchSignUpUser);
+    yield takeLatest(usersConst.SIGNIN_USER, watchSignInUser);
 }
 export default usersSaga;

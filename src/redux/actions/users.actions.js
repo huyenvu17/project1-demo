@@ -14,14 +14,14 @@ export const fetchUserListFail = (error) => ({
     error
 }) 
 
-export const signUpUser = (payload) => ({
+export const signUpUser = (user) => ({
     type: usersConst.SIGNUP_USER,
-    payload
+    user
 })
 
-export const signUpUserSuccess = (payload) => ({
+export const signUpUserSuccess = (user) => ({
     type: usersConst.SIGNUP_USER_SUCCESS,
-    payload
+    user
 })
 
 export const signUpUserFail = (error) => ({
@@ -29,14 +29,14 @@ export const signUpUserFail = (error) => ({
     error
 })
 
-export const signInUser = (payload) => ({
+export const signInUser = (user) => ({
     type: usersConst.SIGNIN_USER,
-    payload
+    user
 })
 
-export const signInUserSuccess = (payload) => ({
+export const signInUserSuccess = (user) => ({
     type: usersConst.SIGNIN_USER_SUCCESS,
-    payload
+    user
 })
 
 export const signInUserFail = (error) => ({

@@ -66,6 +66,15 @@
             padding-top: 1rem;
             text-align: right;
         }
+        .password__field{
+            display: flex;
+            align-items: center;
+            position: relative;
+            .password__icon{
+                position: absolute;
+                right: 16px;
+            }
+        }
     }
     .formlayout__link {
         @include textStyle($green-default, 1rem, $fw-bold, $tf-initial);
@@ -87,7 +96,7 @@
 @mixin responsive($screen) {
     @if map-has-key($map: $breakpoints, $key: $screen) {
         $value: map-get($map: $breakpoints, $key: $screen);
-        @media screen and (max-width: $value) {
+        @media only screen and (max-width: $value) {
             @content;
         }
     }

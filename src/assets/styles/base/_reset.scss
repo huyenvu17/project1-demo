@@ -11,6 +11,18 @@
   color: red;
 }
 
+html{
+  position: relative;
+  min-height: 100%;
+}
+
 body{
   color: $blue-dark!important;
+  margin-bottom: 60px;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+#root{
+  height: 100%;
 }

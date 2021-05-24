@@ -1,7 +1,7 @@
 export const STATUS_SUCCESS = 'success';
-export const STATUS_ERROR = 'info';
+export const STATUS_ERROR = 'error';
 export const STATUS_WARNING = 'warning';
-export const STATUS_INFO = 'error';
+export const STATUS_INFO = 'info';
 
 export const NOTIFICATION_SUCCESS = 'NOTIFICATION_SUCCESS';
 export const NOTIFICATION_ERROR = 'NOTIFICATION_ERROR';
