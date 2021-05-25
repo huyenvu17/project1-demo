@@ -11,7 +11,7 @@ import {CODE_SUCCESS, CODE_CREATE} from '../../constants/status.const';
 import { addNewUser, signInUser } from '../../../services/users.services';
 import * as notificationActions from '../../actions/notification.actions';
 import * as notificationConst from '../../constants/notification.const';
-import {generateRadomToken} from '../../../helpers/randomTokenGenerator.js';
+import { generateRadomToken } from '../../../helpers/randomTokenGenerator.js';
 function* watchFetchListUser() {
     try {
         yield put(loadingActions.showLoading());

@@ -12,7 +12,6 @@ class App extends Component {
 
     render() {
         const { user, isSignedin } = this.props;
-        console.log('app user', user, isSignedin)
         const renderDashboardLayout = (routes) => {
             if (routes && routes.length > 0) {
                 return routes.map((route, index) => {

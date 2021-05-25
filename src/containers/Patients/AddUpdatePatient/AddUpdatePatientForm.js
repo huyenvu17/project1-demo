@@ -35,7 +35,6 @@ class AddUpdatePatientForm extends Component {
     });
   };
 
-
   renderField = ({ input, label, type, meta: { touched, error, warning } }) => {
     const {gender} = this.state
     return (
@@ -65,8 +64,7 @@ class AddUpdatePatientForm extends Component {
   }
 
   render() {
-    const { pristine, reset, submitting, onSubmit, patientId, isUpdate } = this.props
-    console.log('isEdit', patientId)
+    const { pristine, reset, submitting, onSubmit, isUpdate } = this.props
     return (
       <Fragment>
         <form
@@ -141,10 +139,10 @@ class AddUpdatePatientForm extends Component {
                 className="inputgroup__input"
                 validate={validation.required}
               />
-              {/* <Radio.Group onChange={(event) => this.onChangegenderField(event)} value={this.state.patient.gender} >
+              <Radio.Group onChange={(event) => this.onChangegenderField(event)} value={this.state.patient.gender} >
                 <Radio value={0}>Male</Radio>
                 <Radio value={1}>Female</Radio>
-              </Radio.Group> */}
+              </Radio.Group>
             </div>
           </div>
           <div className="formlayout__inputgroup">

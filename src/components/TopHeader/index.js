@@ -49,7 +49,6 @@ class TopHeader extends Component {
   }
   render() {
     const { user } = this.props;
-    console.log('user topheader', user)
     return (
       <Layout.Header className="topheader">
         <div className="topheader__searchbar">

@@ -26,20 +26,8 @@ class AddUpdatePatientContainer extends Component {
     if(isUpdate && propItems != null){
       this.props.onFetchPatientDetail(propItems)
     }
-
   }
 
-  componentDidUpdate(prevProps) {
-    const {propItems} = this.props.options;
-    const {isUpdate} = this.props;
-    //console.log(propItems)
-    //console.log('componentDidUpdate1', prevProps.options.propItems, propItems)
-    if(prevProps.options.propItems !== propItems ) {
-      if(isUpdate && propItems != null) {
-        this.props.onFetchPatientDetail(propItems)
-      }
-    }
-  }
 
   render() {
     const { handleSubmit, pristine, reset, submitting, isUpdate } = this.props
@@ -60,7 +48,7 @@ class AddUpdatePatientContainer extends Component {
 const addUpdatePatientForm = reduxForm({
   form: 'addUpdatePatientForm',
   enableReinitialize: true,
-  keepDirtyOnReinitialize : true,
+  keepDirtyOnReinitialize : false,
   destroyOnUnmount: true
 })(AddUpdatePatientContainer)
 

@@ -41,17 +41,15 @@ class Patients extends Component {
     });
   };
 
-  componentWillUnmount(){
-    console.log('componentWillUnMount')
-    this.props.resetPatientForm();
-  }
-
   componentDidMount() {
     const { onFetchList } = this.props
-    console.log(this.props)
     onFetchList();
   }
 
+  componentWillUnmount(){
+    this.props.resetPatientForm();
+  }
+  
   onShowAddPatientModal = () => {
     this.props.resetPatientForm();
     this.props.onShowModalAddUpdatePatient(AddUpdatePatientContainer);
@@ -62,7 +60,6 @@ class Patients extends Component {
   }
   
   handleEditPatient = (patientId) => {
-    console.log('patientId', patientId);
     let isEdit = true;
     this.props.initUpdatePatientForm(isEdit);
     this.props.onShowModalAddUpdatePatient(AddUpdatePatientContainer, patientId);
@@ -93,7 +90,6 @@ class Patients extends Component {
   }
 
   handleDeletePatient = (patient) => {
-    console.log(patient)
     Modal.confirm({
       title: 'Confirm',
       icon: <ExclamationCircleOutlined />,

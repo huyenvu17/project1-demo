@@ -9,15 +9,11 @@ const initialState = {
     isUpdate: false
 }
 const formInputData = {
-    id: "",
-    name: "",
-    breed: "",
-    coatColor: "",
-    coatcolor: "",
-    dob: "",
-    sex: "",
-    species: "",
-    weight: ""
+    patient: {},
+    patientId: null,
+    formData: {},
+    error: null,
+    isUpdate: false
 }
 const patientsReducer = (state = initialState, action) => {
     const {
