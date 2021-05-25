@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 40px 0!important;
+    padding: 2rem 40px 0 !important;
     .topheader__searchbar {
         display: flex;
         .ant-input-group-addon {
@@ -38,14 +38,24 @@
         }
         .menu__profile {
             padding: 0;
-            box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
-            -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
-            -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
             margin-left: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
             .profile__avatar {
                 border-radius: 8px;
                 object-fit: cover;
                 width: 100%;
+                box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+            }
+            .profile__username {
+                margin-left: 5px;
+                @include textStyle($blue-dark, 1rem, $fw-bold, $tf-initial);
+            }
+            .profile__dropdownicon{
+                font-size: 12px;
             }
         }
         .ant-divider {
@@ -56,5 +66,10 @@
             border-left: 1px solid #ababab;
             margin: 0;
         }
+    }
+}
+.dropdownmenu{
+    .ant-divider-horizontal{
+        margin: 1px 0;
     }
 }

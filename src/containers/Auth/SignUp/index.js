@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import validation from '../../../helpers/validations';
 import { omit } from 'lodash';
-import * as userActions from '../../../redux/actions/users.actions';
+import * as authenActions from '../../../redux/actions/authen.actions';
 import Icon from '@ant-design/icons';
 import {
   EyeOutlined,
@@ -150,13 +150,10 @@ class SignUp extends Component {
 }
 
 
-const mapStateToProps = state => ({
-  //signup: state.signup,
-})
 const mapDispatchToProps = dispatch => ({
-  onSignUpUser: (data) => dispatch(userActions.signUpUser(data))
+  onSignUpUser: (data) => dispatch(authenActions.signUpUser(data))
 })
-const connected = connect(mapStateToProps, mapDispatchToProps)(SignUp)
+const connected = connect(null, mapDispatchToProps)(SignUp)
 
 const signUpForm = reduxForm({
   form: 'signup',

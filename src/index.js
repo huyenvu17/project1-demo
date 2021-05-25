@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
-import {history} from './utils/history';
+import { Router  } from 'react-router-dom';
+import { history } from './utils/history';
 import { Provider } from 'react-redux';
 import 'antd/dist/antd.css';
 import './assets/styles/main';
@@ -14,11 +13,11 @@ import ModalComponent from './components/Modal';
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
+        <Router history={history}>
             <App />
             <Loading />
             <Notification/>
             <ModalComponent/>
-        </ConnectedRouter>
+        </Router>
     </Provider>, 
 document.getElementById("root"));

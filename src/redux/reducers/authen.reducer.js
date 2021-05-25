@@ -1,34 +1,37 @@
-import * as userConst from '../constants/users.const';
-const initialState = {
+import * as authenConst from '../constants/authen.const';
+
+let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+const initialState = userInfo ? {
+    user: userInfo,
+    isSignedin: true
+} : {
     isSignedin: false,
     isSignedup: false,
-    user: {
-        fullname: null,
+    user: null,
+    error: null,
+    userSigninInfo: {
         username: null,
-        password: null,
-        role: null,
-        token: null,
-    },
-    error: null
-}
+        passwordd: null
+    }
+};
 
 const authenReducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
-        case userConst.SIGNUP_USER: {
+        case authenConst.SIGNUP_USER: {
             return {
                 ...state,
                 user: action.user,
             }
         }
-        case userConst.SIGNUP_USER_SUCCESS: {
+        case authenConst.SIGNUP_USER_SUCCESS: {
             return {
                 ...state,
                 user: action.user,
                 isSignedup: true
             }
         }
-        case userConst.SIGNUP_USER_FAIL: {
+        case authenConst.SIGNUP_USER_FAIL: {
             return {
                 ...state,
                 isSignedup: false,
@@ -36,25 +39,31 @@ const authenReducer = (state = initialState, action) => {
 
             }
         }
-        case userConst.SIGNIN_USER: {
+        case authenConst.SIGNIN_USER: {
             return {
                 ...state,
-                user: action.user,
+                userSigninInfo: action.userSigninInfo,
             }
         }
-        case userConst.SIGNIN_USER_SUCCESS: {
+        case authenConst.SIGNIN_USER_SUCCESS: {
             return {
                 ...state,
                 user: action.user,
                 isSignedin: true
             }
         }
-        case userConst.SIGNUP_USER_FAIL: {
+        case authenConst.SIGNUP_USER_FAIL: {
             return {
                 ...state,
                 isSignedin: false,
                 error: action.error
 
+            }
+        }
+        case authenConst.SIGNOUT_USER:
+        case authenConst.SIGNOUT_USER_COMPLETE: {
+            return {
+                ...state
             }
         }
         default:

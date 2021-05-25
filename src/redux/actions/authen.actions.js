@@ -1,33 +1,38 @@
 
-import * as userConst from '../constants/users.const';
+import * as authenConst from '../constants/authen.const';
 
 export const signUpUser = (user) => ({
-    type: userConst.SIGNUP_USER,
+    type: authenConst.SIGNUP_USER,
     user
 })
 
 export const signUpUserSuccess = (user) => ({
-    type: userConst.SIGNUP_USER_SUCCESS,
+    type: authenConst.SIGNUP_USER_SUCCESS,
     user
 })
 
 export const signUpUserFail = (error) => ({
-    type: userConst.SIGNUP_USER_FAIL,
+    type: authenConst.SIGNUP_USER_FAIL,
     error
 })
 
-export const signInUser = (user) => ({
-    type: userConst.SIGNIN_USER,
-    user
+export const signInUser = (userSigninInfo) => ({
+    type: authenConst.SIGNIN_USER,
+    userSigninInfo
 })
 
 export const signInUserSuccess = (user) => ({
-    type: userConst.SIGNIN_USER_SUCCESS,
+    type: authenConst.SIGNIN_USER_SUCCESS,
     user
 })
 
 export const signInUserFail = (error) => ({
-    type: userConst.SIGNIN_USER_FAIL,
+    type: authenConst.SIGNIN_USER_FAIL,
     error
 })
-
+export const signOutUser = () => ({
+    type: authenConst.SIGNOUT_USER,
+})
+export const signOutUserComplete = () => ({
+    type: authenConst.SIGNOUT_USER_COMPLETE,
+})

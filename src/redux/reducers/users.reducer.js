@@ -1,28 +1,7 @@
 import * as usersConst from '../constants/users.const';
 
-const initialState = {
-    isSignedIn: true,
-    signUpItems: {
-        fullname: null,
-        email: null,
-        password: null,
-        confirmPassword: null
-    },
-    signInItems: {
-        email: null,
-        password: null,
-        token: null,
-    },    
-    listUsers: [
-        {
-            username: 'admin1',
-            password: 'admin123'
-        },
-        {
-            username: 'admin0',
-            password: 'admin000'
-        }
-    ], 
+const initialState = {   
+    listUsers: [], 
     error: null
 }
 const usersReducer = (state = initialState, action) => {
@@ -46,12 +25,6 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 error: action.error
             }
-        }
-        case usersConst.SIGNUP_USER: {
-            return{ 
-                ...state,
-                signUpItems: action.payload
-            } 
         }
         default:
             return state;

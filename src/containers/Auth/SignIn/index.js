@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox, Row, Col, Divider } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import { reduxForm, Field } from 'redux-form';
-import * as userActions from '../../../redux/actions/users.actions';
+import * as authenActions from '../../../redux/actions/authen.actions';
 import validation from '../../../helpers/validations';
 import { connect } from 'react-redux';
 import { omit } from 'lodash';
@@ -27,7 +27,7 @@ class SignIn extends Component {
       passwordShown: true
     }
   }
-  togglePasswordVisiblity = (label) => {
+  togglePasswordVisiblity = () => {
     this.setState({ passwordShown: !this.state.passwordShown})
     this.passwordRef.focus();
   }
@@ -42,7 +42,7 @@ class SignIn extends Component {
               <input autoComplete="off" {...passwordField} 
               ref={(input) => this.passwordRef = input} 
               placeholder={label} 
-              type={this.state.confirmPasswordShown ? 'password' : 'text'} 
+              type={this.state.passwordShown ? 'password' : 'text'} 
               className="inputgroup__input" 
               />
               <Icon className="password__icon" 
@@ -116,7 +116,7 @@ class SignIn extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onSignInUser: (data) => dispatch(userActions.signInUser(data))
+  onSignInUser: (data) => dispatch(authenActions.signInUser(data))
 })
 const connected = connect(null, mapDispatchToProps)(SignIn)
 

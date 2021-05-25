@@ -21,20 +21,31 @@ function DashboardLayout(props) {
   )
 }
 export default function DasboardTemplate({ Component, ...props }) {
-  const user = localStorage.getItem("userInfo");
-  return (
-    <Route
-      {...props}
-      render={(propsComponent) => {
-        return user ? (
-          <DashboardLayout>
-            <Component {...propsComponent} />
-          </DashboardLayout>
-        ) : (
-            <Redirect to="/signin" />
-          );
-      }
-      }
+  return props.path === '/' ? (
+    <Route path="/" exact render={() => (
+      (props.user != null)
+        ? <Redirect exact to="/patients" />
+        : <Redirect to="/signin" />
+    )}
     />
   )
+    :
+    (
+      <Route
+        {...props}
+        render={(propsComponent) => {
+          const user = props.userInfo;
+          return (user != null) ? (
+            <DashboardLayout>
+                <Component {...propsComponent} />
+              </DashboardLayout>
+          ) :
+            (
+              <Redirect to="/signin" />
+            );
+        }
+        }
+
+      />
+    )
 }

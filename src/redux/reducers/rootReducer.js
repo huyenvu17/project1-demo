@@ -8,19 +8,11 @@ import usersReducer from './users.reducer';
 import notificationReducer from './notification.reducer';
 import modalReducer from './modal.reducer';
 
-// const rootReducer = combineReducers({
-//     form,
-//     modalReducer,
-//     notificationReducer,
-//     //authenReducer,
-//     loadingReducer,
-//     patientsReducer,
-//     usersReducer
-// })
 const rootReducer = history => combineReducers({
     router: connectRouter(history),
     form,
     modalReducer,
+    authenReducer,
     notificationReducer,
     loadingReducer,
     patientsReducer,

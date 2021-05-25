@@ -9,21 +9,19 @@ import * as notificationConst from '../../constants/notification.const';
 import * as modalActions from '../../actions/modal.actions';
 import { MAIN_DOMAIN } from "../../../utils/config";
 import {CODE_SUCCESS, CODE_CREATE} from '../../constants/status.const';
+
 function* watchFetchListPatients() {
     try {
         yield put(loadingActions.showLoading());
         yield delay(500)
         //const response = yield call(axios.get, `${MAIN_DOMAIN}/pets`);
         const response = yield call(getPatientsList);
-        console.log('response', response)
         if (response && response.status === CODE_SUCCESS && response.data) {
             const {data} = response;
-            console.log("fetchListSuccess")
             yield put(patientsActions.fetchListSuccess(data));
             yield put(loadingActions.hideLoading());
         }
     } catch{
-        console.log("api call failed");
         yield put(patientsActions.fetchListFail(data))
         yield put(loadingActions.hideLoading());
     } finally {
@@ -37,15 +35,12 @@ function* watchFechPatientDetail(payload){
         yield put(loadingActions.showLoading());
         yield delay(500);
         const response = yield call(getPatientDetail, patientId);
-        console.log('response', response)
         if (response && response.status === CODE_SUCCESS && response.data) {
             const {data} = response;
-            console.log("fetch patient detail success", data)
             yield put(patientsActions.fetchPatientDetailSuccess(data));
             yield put(loadingActions.hideLoading());
         }
     } catch{
-        console.log("api call failed");
         yield put(patientsActions.fetchPatientDetailFail(data))
         yield put(loadingActions.hideLoading());
     } finally {
@@ -53,15 +48,11 @@ function* watchFechPatientDetail(payload){
     }
 }
 function* watchAddNewPatient({formData}) {
-    console.log('watchAddNewPatient')
-    console.log('formData', formData)
     try {
         yield put(loadingActions.showLoading());
         yield delay(1500)
-        console.log('api here')
         const response = yield call(addNewPatient, formData);
         //const response = yield call(axios.post, `${MAIN_DOMAIN}/pets`, formData);
-        console.log('response', response)
         if(response && response.status === CODE_CREATE){
             yield put(loadingActions.hideLoading());
             yield put(notificationActions.showNotificationSuccess({
@@ -83,8 +74,6 @@ function* watchAddNewPatient({formData}) {
 }
 
 function* watchUpdatePatient({formData}) {
-    console.log('watchAddNewPatient')
-    console.log('formData', formData)
     const {id, name, dob, breed, coatColor, sex,species, weight} = formData
     let updateValues = {
         id,
@@ -97,24 +86,18 @@ function* watchUpdatePatient({formData}) {
         species,
         weight
     }
-    console.log(id)
     try {
         yield put(loadingActions.showLoading());
         yield delay(1500)
-        console.log('api here')
         const response = yield call(updatePatient, updateValues, id);
         //const response = yield call(axios.post, `${MAIN_DOMAIN}/pets`, formData);
-        console.log('response', response)
         if(response && response.status === CODE_SUCCESS){
-            console.log('hideLoading')
             yield put(loadingActions.hideLoading());
-            console.log('show noti')
             yield put(notificationActions.showNotificationSuccess({
                 type: notificationConst.STATUS_SUCCESS,
                 message: 'Success',
                 description: 'Patient updated successfully!'
             }));
-            console.log('update patient')
             yield put(patientsActions.updatePatientSuccess());
             yield call(getPatientsList);
         }
@@ -127,13 +110,11 @@ function* watchUpdatePatient({formData}) {
 }
 
 function* watchDeletePatient(payload) {
-    console.log("get patientId from saga", payload.patientId)
     const { patientId } = payload
     if(patientId != null){
         try {
             yield put(loadingActions.showLoading());
             yield delay(500)
-            console.log('api here')
             const response = yield call(deletePatient, payload.patientId);
             //const response = yield call(axios.delete, `${MAIN_DOMAIN}/pets`, parseIn(patientId));
             console.log('response', response)
@@ -160,7 +141,7 @@ function* watchDeletePatient(payload) {
 
 function* patientsSaga() {
     yield takeLatest(patientsConst.FETCH_LIST, watchFetchListPatients);
-    yield takeEvery(patientsConst.FETCH_PATIENT_DETAIL, watchFechPatientDetail)
+    yield takeEvery(patientsConst.FETCH_PATIENT_DETAIL, watchFechPatientDetail);
     yield takeEvery(patientsConst.ADD_PATIENT, watchAddNewPatient);
     yield takeLatest(patientsConst.UPDATE_PATIENT_DETAIL, watchUpdatePatient);
     yield takeLatest(patientsConst.DELETE_PATIENT, watchDeletePatient);
