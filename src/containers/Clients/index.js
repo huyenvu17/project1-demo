@@ -8,11 +8,6 @@ export default class Clients extends Component {
     return (
       <Layout.Content
         className="content"
-        style={{
-          margin: '24px 16px',
-          padding: 24,
-          minHeight: 280,
-        }}
       >
         <h1 className="content__header">Clients</h1>
       </Layout.Content>

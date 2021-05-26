@@ -1,5 +1,8 @@
-.content{
-    .content__header{
+.content {
+    margin: 24px 16px;
+    padding: 24px;
+    min-height: 280px;
+    .content__header {
         @include textStyle($blue-dark, 2rem, $fw-bold, $tf-initial);
     }
 }

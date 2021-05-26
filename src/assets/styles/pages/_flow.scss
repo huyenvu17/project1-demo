@@ -1,0 +1,106 @@
+.flow {
+    .flow__taskboard {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+        .taskboard__column {
+            .column__header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                .header__title {
+                    @include textStyle($blue-dark, 1.1rem, $fw-bold, $tf-capitalize);
+                    margin-bottom: 0;
+                    margin-right: 8px;
+                }
+                .header__taskcount {
+                    width: 30px;
+                    height: 30px;
+                    background: $green-default;
+                    padding: 1px;
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 8px;
+                    line-height: 30px;
+                    font-size: 14px;
+                    &.empty{
+                        background: $grey-3;
+                    }
+                }
+            }
+            .column__content {
+                margin-top: 1rem;
+                padding: 8px;
+                transition: 'background-color 0.2s ease';
+                flex-grow: 1;
+                min-height: 100px;
+                border-radius: 8px;
+                &.is-stable{
+                    background: transparent;
+                }
+                &.is-dragging{
+                    background: $grey-1;
+                }
+                .taskbox{
+                    position: relative;
+                    background-color: #fff;
+                    margin-bottom: 1rem;
+                    border-radius: 10px;
+                    box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                    -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                    -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                    .taskbox__status{
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        border-radius: 0 10px 0 10px;
+                        padding: 5px 35px;
+                        background-color: $green-default;
+                        color: #fff;
+                    }
+                    .taskbox__info{
+                        padding: 1rem;
+                        padding-top: 1.6rem;
+                        .taskbox__client{
+                            @include textStyle($blue-dark, 1.1rem, $fw-bold, $tf-capitalize);
+                        }
+                        .taskbox__item{
+                            margin-bottom: 3px;
+                            .item__image{
+                                vertical-align: text-bottom;
+                                img{
+                                    width: 20px;
+                                }
+                            }
+                            .item__title{
+                                @include textStyle($blue-dark, 1rem, $fw-normal, $tf-capitalize);
+                                margin-left: 8px;
+                            }
+                        }
+                    }
+                    .taskbox__buttons{
+                        padding: 1rem;
+                        text-align: center;
+                        button{
+                            margin: 0 5px;
+                            width: 45%;
+                        }
+                    }
+                }
+            }
+            .taskboard__emptytask{
+                position: relative;
+                display: inline-block;
+                width: 100%;
+                min-width: 0;
+                padding: 8px 11px;
+                font-size: 14px;
+                line-height: 1.5715;
+                background-color: $grey-1;
+                color: $grey-3;
+                border-radius: 10px;
+                border: none;
+            }
+        }
+    }
+}

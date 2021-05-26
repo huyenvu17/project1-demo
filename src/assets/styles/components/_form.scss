@@ -5,3 +5,18 @@
         margin-left: 5px;
     }
 }
+.searchbar{
+    display: flex;
+        .ant-input-group-addon {
+            display: none;
+        }
+        .searchbar__input {
+            .ant-input-affix-wrapper {
+                border-radius: 10px !important;
+                border: none !important;
+                box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+            }
+        }
+}

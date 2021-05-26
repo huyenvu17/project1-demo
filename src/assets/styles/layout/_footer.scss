@@ -1,7 +1,5 @@
 .authenpage {
     .footer {
-        // position: absolute;
-        // bottom: 0;
         margin-top: 8rem;
         width: 100%;
         height: 60px;
@@ -11,11 +9,10 @@
 }
 
 @include responsive("medium-large"){
-    .authenpage{
-        .footer{
+    .authenpage {
+        .footer {
             margin-top: 6rem;
         }
-        
     }
   }
   @include responsive("default") {
