@@ -5,11 +5,25 @@ import { SearchOutlined } from '@ant-design/icons';
 import PatientIcon from '../../assets/images/icons/patient-icon.svg';
 import CalendarIcon from '../../assets/images/icons/calendar-icon.svg';
 import DoctorIcon from '../../assets/images/icons/doctor-icon.svg';
-class Task extends Component {
+class Ticket extends Component {
+  
   render() {
+    const ticketInfo = this.props.ticket;
+    const ticketType = ticketInfo.type;
+    let ticketTypeStyle = '';
+    switch(ticketType){
+      case 0:
+        ticketTypeStyle = 'new';
+        break;
+      case 1:
+        ticketTypeStyle = 'emergency';
+        break;
+      default:
+        break;
+    }
     return (
       <Draggable
-        draggableId={this.props.task.id}
+        draggableId={ticketInfo.id}
         index={this.props.index}
       >
         {(provided, snapshot) => (
@@ -19,24 +33,24 @@ class Task extends Component {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <div className="taskbox__status">
-                new
+            <div className={`taskbox__type ${ticketTypeStyle}`}>
+                {ticketTypeStyle}
             </div>
             <div className="taskbox__info">
-              <div className="taskbox__client">Tom Hilton</div>
+              <div className="taskbox__client">{ticketInfo.client}</div>
               <div className="taskbox__item">
                 <span className="item__image"><img src={PatientIcon}/></span>
-                <span className="item__title">Bella</span>
+                <span className="item__title">{ticketInfo.patient}</span>
               </div>
               <div className="taskbox__item">
                 <span className="item__image"><img src={CalendarIcon}/></span>
-                <span className="item__title">26/05/2021</span>
+                <span className="item__title">{ticketInfo.appointmentDate}</span>
               </div>
               <div className="taskbox__item">
                 <span className="item__image"><img src={DoctorIcon}/></span>
-                <span className="item__title">Dr. Charlie Wilson</span>
+                <span className="item__title">{ticketInfo.doctor}</span>
               </div>
-              <div className="taskbox__note">{this.props.task.content}</div>
+              <div className="taskbox__note">{ticketInfo.note}</div>
             </div>
             <Divider type="horizontal" />
             <div className="taskbox__buttons">
@@ -49,17 +63,16 @@ class Task extends Component {
     )
   }
 }
-class Column extends Component {
-
+class Stage extends Component {
   render() {
-    const taskCount = this.props.tasks.length;
+    const taskCount = this.props.tickets.length;
     console.log(taskCount)
     const taskCountBadgeStyle = taskCount == 0 ? 'empty' : '';
     return (
       <Fragment>
-        <div className="taskboard__column">
-        <div className="column__header">
-          <h3 className="header__title">{this.props.column.title}</h3>
+        <div className="taskboard__stage">
+        <div className="stage__header">
+          <h3 className="header__title">{this.props.stage.title}</h3>
           <div className={`header__taskcount ${taskCountBadgeStyle}`} >{taskCount}</div>
         </div>
         <div>
@@ -79,15 +92,15 @@ class Column extends Component {
           <div className="taskboard__emptytask">None in progressed</div>
         )}
         </div>
-        <Droppable droppableId={this.props.column.id} type="ticket">
+        <Droppable droppableId={this.props.stage.id} type="ticket">
           {(provided, snapshot) => (
             <div
-              className={`column__content ${snapshot.isDraggingOver ? 'is-dragging' : 'is-stable'}`}
+              className={`stage__content ${snapshot.isDraggingOver ? 'is-dragging' : 'is-stable'}`}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {this.props.tasks.map((task, index) => (
-                <Task key={task.id} task={task} index={index} />
+              {this.props.tickets.map((ticket, index) => (
+                <Ticket key={ticket.id} ticket={ticket} index={index} />
               ))}
               {provided.placeholder}
             </div>
@@ -102,40 +115,40 @@ export default class Flow extends Component {
   constructor(props){
     super(props);
     this.state = {
-      tasks: {
-        'task-1': { id: 'task-1', content: 'Take out the garbage' },
-        'task-2': { id: 'task-2', content: 'Watch my favorite show' },
-        'task-3': { id: 'task-3', content: 'Charge my phone' },
-        'task-4': { id: 'task-4', content: 'Cook dinner' }
+      tickets: {
+        'ticket-1': { id: 'ticket-1', client: 'Kaylee Tucker', patient: 'vitamin', appointmentDate: '29/05/2021', doctor: 'Franklin Moreno', note: 'General health check', type: 0 },
+        'ticket-2': { id: 'ticket-2', client: 'Cory Little', patient: 'shiba', appointmentDate: '28/05/2021', doctor: 'Luke Prescott', note: 'Breathing issues', type: 1 },
+        'ticket-3': { id: 'ticket-3', client: 'Eileen Lewis', patient: 'finny', appointmentDate: '20/05/2021', doctor: 'Andrew Price', note: 'Swelling or redness in the ear canal', type: 0 },
+        'ticket-4': { id: 'ticket-4', client: 'Layla Ramirez', patient: 'kiti', appointmentDate: '10/04/2021', doctor: 'Douglas Holmes', note: 'Diarrhea (usually bloody)', type: 1 }
       },
-      columns: {
+      stages: {
         'awaiting': {
           id: 'awaiting',
           title: 'Awaiting',
-          taskIds: ['task-1', 'task-2', 'task-3', 'task-4']
+          ticketItems: ['ticket-1', 'ticket-2']
         },
         'checkedin': {
           id: 'checkedin',
           title: 'Checked In',
-          taskIds: []
+          ticketItems: ['ticket-4']
         },
         'inprogressed': {
           id: 'inprogressed',
           title: 'In Progressed',
-          taskIds: []
+          ticketItems: ['ticket-3']
         },
         'hospitalized': {
           id: 'hospitalized',
           title: 'Hospitalized',
-          taskIds: []
+          ticketItems: []
         },
         'checkingout': {
           id: 'checkingout',
           title: 'Checking Out',
-          taskIds: []
+          ticketItems: []
         }
       },
-      columnOrder: ['awaiting', 'checkedin', 'inprogressed','hospitalized', 'checkingout']
+      stageOrder: ['awaiting', 'checkedin', 'inprogressed','hospitalized', 'checkingout']
     }
   }
   onDragEnd = result => {
@@ -151,52 +164,51 @@ export default class Flow extends Component {
       return
     }
 
-    const start = this.state.columns[source.droppableId]
-    const finish = this.state.columns[destination.droppableId]
+    const start = this.state.stages[source.droppableId]
+    const finish = this.state.stages[destination.droppableId]
 
     if (start === finish) {
-      const newTaskIds = Array.from(start.taskIds)
-      newTaskIds.splice(source.index, 1)
-      newTaskIds.splice(destination.index, 0, draggableId)
-      const newColumn = {
+      const updatedTicketItems = Array.from(start.ticketItems)
+      updatedTicketItems.splice(source.index, 1)
+      updatedTicketItems.splice(destination.index, 0, draggableId)
+      const newStage = {
         ...start,
-        taskIds: newTaskIds
+        ticketItems: updatedTicketItems
       }
-      const newState = {
+      const updatedFlow = {
         ...this.state,
-        columns: {
-          ...this.state.columns,
-          [newColumn.id]: newColumn
+        stages: {
+          ...this.state.stages,
+          [newStage.id]: newStage
         }
       }
-      this.setState(newState);
+      this.setState(updatedFlow);
       return
     }
 
-    // Moving tasks among lists
-    const startTaskIds = Array.from(start.taskIds)
-    startTaskIds.splice(source.index, 1)
+    const ticketItemsStart = Array.from(start.ticketItems)
+    ticketItemsStart.splice(source.index, 1)
     const newStart = {
       ...start,
-      taskIds: startTaskIds
+      ticketItems: ticketItemsStart
     }
 
-    const finishTaskIds = Array.from(finish.taskIds)
-    finishTaskIds.splice(destination.index, 0, draggableId)
+    const ticketItemsFinish = Array.from(finish.ticketItems)
+    ticketItemsFinish.splice(destination.index, 0, draggableId)
     const newFinish = {
       ...finish,
-      taskIds: finishTaskIds
+      ticketItems: ticketItemsFinish
     }
 
-    const newState = {
+    const updatedFlow = {
       ...this.state,
-      columns: {
-        ...this.state.columns,
+      stages: {
+        ...this.state.stages,
         [newStart.id]: newStart,
         [newFinish.id]: newFinish
       }
     }
-    this.setState(newState);
+    this.setState(updatedFlow);
   }
 
   render() {
@@ -207,11 +219,11 @@ export default class Flow extends Component {
         <h1 className="content__header">Flow</h1>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div  className="flow__taskboard">
-            {this.state.columnOrder.map(columnId => {
-              const column = this.state.columns[columnId];
-              const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+            {this.state.stageOrder.map(stageId => {
+              const stage = this.state.stages[stageId];
+              const tickets = stage.ticketItems.map(ticketId => this.state.tickets[ticketId]);
               return (
-                <Column key={column.id} column={column} tasks={tasks} />
+                <Stage key={stage.id} stage={stage} tickets={tickets} />
               )
             })}
           </div>

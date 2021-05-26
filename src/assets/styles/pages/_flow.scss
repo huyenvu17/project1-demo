@@ -2,9 +2,9 @@
     .flow__taskboard {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        gap: 5px;
-        .taskboard__column {
-            .column__header {
+        gap: 2rem;
+        .taskboard__stage {
+            .stage__header {
                 display: flex;
                 align-items: center;
                 margin-bottom: 10px;
@@ -28,9 +28,8 @@
                     }
                 }
             }
-            .column__content {
+            .stage__content {
                 margin-top: 1rem;
-                padding: 8px;
                 transition: 'background-color 0.2s ease';
                 flex-grow: 1;
                 min-height: 100px;
@@ -49,20 +48,28 @@
                     box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
                     -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
                     -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
-                    .taskbox__status{
+                    .taskbox__type{
                         position: absolute;
                         top: 0;
                         right: 0;
                         border-radius: 0 10px 0 10px;
                         padding: 5px 35px;
-                        background-color: $green-default;
+                        background-color: #fff;
                         color: #fff;
+                        text-transform: capitalize;
+                        &.new{
+                            background-color: $green-default;
+                        }
+                        &.emergency{
+                            background-color: $danger-default;
+                        }
                     }
                     .taskbox__info{
                         padding: 1rem;
                         padding-top: 1.6rem;
                         .taskbox__client{
                             @include textStyle($blue-dark, 1.1rem, $fw-bold, $tf-capitalize);
+                            margin-bottom: 0.5rem;
                         }
                         .taskbox__item{
                             margin-bottom: 3px;
@@ -76,6 +83,10 @@
                                 @include textStyle($blue-dark, 1rem, $fw-normal, $tf-capitalize);
                                 margin-left: 8px;
                             }
+                        }
+                        .taskbox__note{
+                            @include textStyle($blue-dark, 0.9rem, $fw-bold, $tf-initial);
+                            margin-top: 0.3rem;
                         }
                     }
                     .taskbox__buttons{
