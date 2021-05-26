@@ -1,0 +1,51 @@
+.schedule{
+    .schedule__fullcalendar{
+        height: 100%;
+        .fc-header-toolbar{
+            .fc-button-group{
+                .fc-button{
+                    @include buttonStyle($green-default, $green-default, $white-default, 3px, 18px, 8px, $tf-uppercase);
+                    margin: 0 2px;
+                }
+            }
+            .fc-toolbar-title{
+                @include textStyle($blue-dark, 2rem, $fw-bold, $tf-initial);
+            }
+        }
+        .fc-view{
+            .fc-scrollgrid{
+                background-color: #fff;
+                border:none;
+                border-radius: 10px;
+                box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
+                .fc-scroller{
+                    &::-webkit-scrollbar {
+                        width: 7px;
+                        background-color: $grey-2;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: $grey-3;
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
+    }
+    .schedule__logs{
+        margin-top: 1rem;
+        background-color: #fff;
+        padding: 1rem;
+        .logs__header{
+            @include textStyle($blue-dark, 1.2rem, $fw-bold, $tf-initial);
+        }
+        .logs__wrapper{
+            .logs__item{
+                .logs__datetime{
+                    @include textStyle($grey-3, 0.9rem, $fw-normal, $tf-initial);
+                }
+            }
+        }
+    }
+}
