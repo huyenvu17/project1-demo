@@ -23,7 +23,7 @@
                     border-radius: 8px;
                     line-height: 30px;
                     font-size: 14px;
-                    &.empty{
+                    &.empty {
                         background: $grey-3;
                     }
                 }
@@ -34,13 +34,13 @@
                 flex-grow: 1;
                 min-height: 100px;
                 border-radius: 8px;
-                &.is-stable{
+                &.is-stable {
                     background: transparent;
                 }
-                &.is-dragging{
+                &.is-dragging {
                     background: $grey-1;
                 }
-                .taskbox{
+                .taskbox {
                     position: relative;
                     background-color: #fff;
                     margin-bottom: 1rem;
@@ -48,7 +48,7 @@
                     box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
                     -webkit-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
                     -moz-box-shadow: 1px 2px 27px 6px rgba(0, 0, 0, 0.05);
-                    .taskbox__type{
+                    .taskbox__type {
                         position: absolute;
                         top: 0;
                         right: 0;
@@ -57,49 +57,49 @@
                         background-color: #fff;
                         color: #fff;
                         text-transform: capitalize;
-                        &.new{
+                        &.new {
                             background-color: $green-default;
                         }
-                        &.emergency{
+                        &.emergency {
                             background-color: $danger-default;
                         }
                     }
-                    .taskbox__info{
+                    .taskbox__info {
                         padding: 1rem;
                         padding-top: 1.6rem;
-                        .taskbox__client{
+                        .taskbox__client {
                             @include textStyle($blue-dark, 1.1rem, $fw-bold, $tf-capitalize);
                             margin-bottom: 0.5rem;
                         }
-                        .taskbox__item{
+                        .taskbox__item {
                             margin-bottom: 3px;
-                            .item__image{
+                            .item__image {
                                 vertical-align: text-bottom;
-                                img{
+                                img {
                                     width: 20px;
                                 }
                             }
-                            .item__title{
+                            .item__title {
                                 @include textStyle($blue-dark, 1rem, $fw-normal, $tf-capitalize);
                                 margin-left: 8px;
                             }
                         }
-                        .taskbox__note{
+                        .taskbox__note {
                             @include textStyle($blue-dark, 0.9rem, $fw-bold, $tf-initial);
                             margin-top: 0.3rem;
                         }
                     }
-                    .taskbox__buttons{
+                    .taskbox__buttons {
                         padding: 1rem;
                         text-align: center;
-                        button{
+                        button {
                             margin: 0 5px;
                             width: 45%;
                         }
                     }
                 }
             }
-            .taskboard__emptytask{
+            .taskboard__emptytask {
                 position: relative;
                 display: inline-block;
                 width: 100%;
@@ -111,6 +111,156 @@
                 color: $grey-3;
                 border-radius: 10px;
                 border: none;
+            }
+        }
+    }
+}
+
+@include responsive("large") {
+    .flow {
+        .flow__taskboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            .taskboard__stage {
+                .stage__header {
+                    .header__title {
+                        @include textStyle($blue-dark, 1.1rem, $fw-bold, $tf-capitalize);
+                        margin-bottom: 0;
+                        margin-right: 8px;
+                    }
+                    .header__taskcount {
+                        width: 25px;
+                        height: 25px;
+                        background: #51b78e;
+                        padding: 0px;
+                        color: #fff;
+                        text-align: center;
+                        border-radius: 8px;
+                        line-height: 25px;
+                        font-size: 11px;
+                        &.empty {
+                            background: $grey-3;
+                        }
+                    }
+                }
+                .stage__content {
+                    .taskbox {
+                        .taskbox__type {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            border-radius: 0 10px 0 10px;
+                            padding: 3px 20px;
+                            font-size: 14px;
+                            background-color: #fff;
+                            color: #fff;
+                            text-transform: capitalize;
+                        }
+                        .taskbox__info {
+                            padding: 1rem;
+                            padding-top: 1.6rem;
+                            .taskbox__client {
+                                @include textStyle($blue-dark, 1rem, $fw-bold, $tf-capitalize);
+                                margin-bottom: 0;
+                            }
+                            .taskbox__item {
+                                margin-bottom: 0px;
+                                .item__image {
+                                    vertical-align: initial;
+                                    img {
+                                        width: 15px;
+                                    }
+                                }
+                                .item__title {
+                                    @include textStyle($blue-dark, 0.8rem, $fw-normal, $tf-capitalize);
+                                    margin-left: 8px;
+                                }
+                            }
+                            .taskbox__note {
+                                @include textStyle($blue-dark, 0.8rem, $fw-bold, $tf-initial);
+                                margin-top: 0.4rem;
+                            }
+                        }
+                        .taskbox__buttons {
+                            padding: 0.5rem;
+                            text-align: center;
+                            button {
+                                margin: 0 5px;
+                                width: 45%;
+                                font-size: 11px;
+                                padding: 5px;
+                            }
+                        }
+                    }
+                }
+                .taskboard__emptytask {
+                    font-size: 12px;
+                }
+                .searchbar{
+                    .searchbar__input{
+                        input{
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include responsive("medium-large") {
+    .flow {
+        .flow__taskboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            .taskboard__stage {
+                .stage__content {
+                    .taskbox {
+                        .taskbox__type {
+                            border-radius: 0 10px 0 10px;
+                            padding: 3px 20px;
+                            font-size: 12px;
+                        }
+                        .taskbox__info {
+                            padding: 1rem;
+                            padding-top: 1.5rem;
+                            padding-bottom: 0.5rem;
+                            .taskbox__client {
+                                @include textStyle($blue-dark, 1rem, $fw-bold, $tf-capitalize);
+                                margin-bottom: 0;
+                            }
+                            .taskbox__item {
+                                margin-bottom: 0px;
+                                .item__image {
+                                    vertical-align: text-bottom;
+                                    img {
+                                        width: 15px;
+                                    }
+                                }
+                                .item__title {
+                                    @include textStyle($blue-dark, 0.8rem, $fw-normal, $tf-capitalize);
+                                    margin-left: 8px;
+                                }
+                            }
+                            .taskbox__note {
+                                @include textStyle($blue-dark, 0.8rem, $fw-bold, $tf-initial);
+                                margin-top: 0.4rem;
+                            }
+                        }
+                        .taskbox__buttons {
+                            padding: 0.5rem;
+                            text-align: center;
+                            button {
+                                margin: 0 5px;
+                                width: 43%;
+                                font-size: 11px;
+                                padding: 3px;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

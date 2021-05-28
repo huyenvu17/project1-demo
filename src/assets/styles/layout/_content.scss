@@ -6,3 +6,10 @@
         @include textStyle($blue-dark, 2rem, $fw-bold, $tf-initial);
     }
 }
+@include responsive('medium-large'){
+    .content{
+        .content__header{
+            @include textStyle($blue-dark, 1.7rem, $fw-bold, $tf-initial);
+        }
+    }
+}

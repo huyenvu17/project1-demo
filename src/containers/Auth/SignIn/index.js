@@ -57,7 +57,6 @@ class SignIn extends Component {
     )
   }
   handleSignInUser = (values) => {
-    console.log(values)
     this.props.onSignInUser(values)
   }
   render() {

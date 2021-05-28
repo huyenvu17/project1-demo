@@ -49,3 +49,21 @@
         }
     }
 }
+@include responsive('medium-large'){
+    .schedule{
+        .schedule__fullcalendar{
+            height: 100%;
+            .fc-header-toolbar{
+                .fc-button-group{
+                    .fc-button{
+                        @include buttonStyle($green-default, $green-default, $white-default, 3px, 18px, 8px, $tf-uppercase);
+                        margin: 0 2px;
+                    }
+                }
+                .fc-toolbar-title{
+                    @include textStyle($blue-dark, 1.5rem, $fw-bold, $tf-initial);
+                }
+            }
+        }
+    }
+}

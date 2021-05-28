@@ -6,9 +6,26 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from "@fullcalendar/interaction";
 import { connect } from 'react-redux';
+import moment from 'moment';
+import * as modalActions from '../../redux/actions/modal.actions';
+import AddUpdateScheduleContainer from './AddUpdateSchedule/AddUpdateScheduleContainer';
 class Schedule extends Component {
   onPanelChange(value, mode) {
     console.log(value, mode);
+  }
+  handleScheduleEvent = (selectionInfo) => {
+    if(selectionInfo){
+      console.log('selected ' + selectionInfo.startStr + ' to ' + selectionInfo.endStr)
+    }else{
+      console.log("add schedule")
+      this.props.onOpenScheduleEventModal(AddUpdateScheduleContainer, this.scheduleCalendarRef);
+    }
+    
+  }
+  handleAddSchedule = (schedule) => {
+    console.log('eventAdd', schedule);
+    let calendarApi = scheduleCalendarRef.current.getApi();
+    calendarApi.addEvent(schedule);
   }
   render() {
     return (
@@ -20,17 +37,19 @@ class Schedule extends Component {
           <Col span={18} >
             <div className="schedule__fullcalendar">
             <FullCalendar
+              ref={(ref) => this.scheduleCalendarRef = ref}
               plugins={[timeGridPlugin, interactionPlugin]}
               initialView="timeGridWeek"
               headerToolbar={{
-                left: 'prev,next,today',
+                left: 'prev,next,myCustomButton',
                 center: 'title',
-                right: 'timeGridWeek,timeGridDay'
+                right: 'today,timeGridWeek,timeGridDay'
               }}
               allDaySlot={true}
               editable={true}
               selectable={true}
               selectMirror={true}
+              unselectAuto={true}
               dayMaxEvents={true}
               height={'90%'}
               events={[
@@ -38,9 +57,18 @@ class Schedule extends Component {
                 { title: 'event 2', date: '2021-05-27' }
               ]}
               select={
-                (selectionInfo) => alert('selected ' + selectionInfo.startStr + ' to ' + selectionInfo.endStr)
+                (selectionInfo) => this.handleScheduleEvent(selectionInfo)
               }
-              dateClick={(info) => console.log(info.dateStr)}
+              //dateClick={(info) => console.log(info.dateStr)}
+              eventAdd={(addInfo) => this.handleAddSchedule}
+              customButtons={
+                {
+                  myCustomButton: {
+                      text: 'Add Schedule',
+                      click: () => this.handleScheduleEvent(),
+                  },
+              }
+              }
             />
             </div>
           </Col>
@@ -67,7 +95,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  onOpenScheduleEventModal: (component, options) => dispatch(modalActions.showModal(component, options))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule)
